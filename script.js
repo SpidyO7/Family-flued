@@ -17,74 +17,244 @@
    100 real students on campus would actually blurt them out.
    ------------------------------------------------------------------------- */
 const PRELOADED_QUESTIONS = [
-  { question: "Name the first thing you check when you wake up.",
-    answers: [{text:"Phone",points:34},{text:"Time",points:22},{text:"Messages",points:18},{text:"Alarm",points:14},{text:"Instagram",points:8},{text:"Nothing",points:4}] },
-  { question: "Name something every hostel room has.",
-    answers: [{text:"Charger",points:28},{text:"Bucket",points:22},{text:"Speaker",points:18},{text:"Mirror",points:14},{text:"Kettle",points:10},{text:"Iron",points:8}] },
-  { question: "Name a canteen snack students can't live without.",
-    answers: [{text:"Maggi",points:30},{text:"Momo",points:24},{text:"Samosa",points:20},{text:"Tea",points:14},{text:"Chowmein",points:8},{text:"Roll",points:4}] },
-  { question: "Name something students do in a boring class.",
-    answers: [{text:"Sleep",points:30},{text:"Phone",points:26},{text:"Doodle",points:16},{text:"Chat",points:14},{text:"Bunk",points:8},{text:"Reels",points:6}] },
-  { question: "Name the first word that pops into your head when you hear 'exam'.",
-    answers: [{text:"Stress",points:28},{text:"Backlog",points:22},{text:"Panic",points:18},{text:"Notes",points:16},{text:"Coffee",points:10},{text:"Pray",points:6}] },
-  { question: "Name something every fresher feels in week one.",
-    answers: [{text:"Lost",points:28},{text:"Shy",points:24},{text:"Nervous",points:18},{text:"Excited",points:16},{text:"Confused",points:10},{text:"Homesick",points:4}] },
-  { question: "Name a popular hangout spot for students.",
-    answers: [{text:"Canteen",points:28},{text:"Riverside",points:22},{text:"Fancy Bazaar",points:18},{text:"Café",points:16},{text:"Ground",points:10},{text:"Park",points:6}] },
-  { question: "Name something you need on a rainy campus day.",
-    answers: [{text:"Umbrella",points:32},{text:"Raincoat",points:22},{text:"Boots",points:18},{text:"Jacket",points:14},{text:"Tea",points:9},{text:"Slippers",points:5}] },
-  { question: "Name something students binge on during exam season.",
-    answers: [{text:"Maggi",points:28},{text:"Coffee",points:24},{text:"Chips",points:18},{text:"Chocolate",points:14},{text:"Chai",points:10},{text:"Biscuits",points:6}] },
-  { question: "Name a Gen-Z word students use all the time.",
-    answers: [{text:"Bro",points:26},{text:"Vibe",points:22},{text:"Slay",points:18},{text:"Cringe",points:16},{text:"Sus",points:10},{text:"Mood",points:8}] },
-  { question: "Name something you do on a college weekend.",
-    answers: [{text:"Sleep",points:28},{text:"Movie",points:22},{text:"Outing",points:18},{text:"Shopping",points:14},{text:"Netflix",points:10},{text:"Party",points:8}] },
-  { question: "Name a mobile app students open the most.",
-    answers: [{text:"Instagram",points:32},{text:"WhatsApp",points:26},{text:"YouTube",points:18},{text:"Snapchat",points:12},{text:"Spotify",points:8},{text:"BGMI",points:4}] },
-  { question: "Name something every friend group has one of.",
-    answers: [{text:"Foodie",points:24},{text:"Topper",points:20},{text:"Jokester",points:18},{text:"Latecomer",points:16},{text:"Photographer",points:12},{text:"Drama queen",points:10}] },
-  { question: "Name a reason students skip breakfast.",
-    answers: [{text:"Late",points:30},{text:"Lazy",points:24},{text:"Sleep",points:18},{text:"Diet",points:14},{text:"No time",points:8},{text:"Broke",points:6}] },
-  { question: "Name something you'll always hear in a Bihu playlist.",
-    answers: [{text:"Dhol",points:30},{text:"Pepa",points:24},{text:"Gogona",points:18},{text:"Xutuli",points:14},{text:"Toka",points:8},{text:"Bihu geet",points:6}] },
-  { question: "Name a must-have Bihu outfit item.",
-    answers: [{text:"Gamosa",points:30},{text:"Mekhela",points:24},{text:"Dhoti",points:18},{text:"Jaapi",points:14},{text:"Kurta",points:8},{text:"Sador",points:6}] },
-  { question: "Name something students eat during Bihu.",
-    answers: [{text:"Pitha",points:30},{text:"Laru",points:24},{text:"Jolpan",points:18},{text:"Chira",points:14},{text:"Curd",points:8},{text:"Payash",points:6}] },
-  { question: "Name a popular Assamese street food.",
-    answers: [{text:"Jhalmuri",points:26},{text:"Momo",points:24},{text:"Pani puri",points:18},{text:"Ghugni",points:14},{text:"Alu chop",points:10},{text:"Piyaji",points:8}] },
-  { question: "Name something you'll find at a college fest.",
-    answers: [{text:"Music",points:26},{text:"Food stalls",points:22},{text:"Dance",points:18},{text:"Crowd",points:14},{text:"Selfies",points:12},{text:"Chaos",points:8}] },
-  { question: "Name a common excuse for missing class.",
-    answers: [{text:"Overslept",points:28},{text:"Traffic",points:22},{text:"Sick",points:18},{text:"Rain",points:14},{text:"Bus",points:10},{text:"Lazy",points:8}] },
-  { question: "Name something you do right before an exam.",
-    answers: [{text:"Pray",points:26},{text:"Cram",points:22},{text:"Panic",points:20},{text:"Skim",points:14},{text:"Copy",points:10},{text:"Blank out",points:8}] },
-  { question: "Name a local transport students use to reach college.",
-    answers: [{text:"Auto",points:30},{text:"Bus",points:26},{text:"Bike",points:18},{text:"Cycle",points:12},{text:"Sumo",points:8},{text:"Walk",points:6}] },
-  { question: "Name something every college group chat is full of.",
-    answers: [{text:"Memes",points:28},{text:"Spam",points:22},{text:"Notes",points:18},{text:"Gossip",points:14},{text:"Assignments",points:10},{text:"Silence",points:8}] },
-  { question: "Name a snack students order on a rainy day.",
-    answers: [{text:"Maggi",points:30},{text:"Pakora",points:24},{text:"Tea",points:20},{text:"Momo",points:16},{text:"Jalebi",points:10}] },
-  { question: "Name something you see everywhere during Durga Puja.",
-    answers: [{text:"Pandal",points:28},{text:"Lights",points:22},{text:"Dhunuchi",points:16},{text:"Bhog",points:14},{text:"Crowd",points:12},{text:"Sindoor",points:8}] },
-  { question: "Name a reason students are broke by month-end.",
-    answers: [{text:"Food",points:28},{text:"Shopping",points:22},{text:"Outing",points:18},{text:"Recharge",points:14},{text:"Rent",points:10},{text:"Party",points:8}] },
-  { question: "Name a popular hill station NE students visit on trips.",
-    answers: [{text:"Shillong",points:30},{text:"Tawang",points:22},{text:"Kohima",points:18},{text:"Ziro",points:14},{text:"Kalimpong",points:10},{text:"Cherrapunji",points:6}] },
-  { question: "Name something a student packs for a college trip.",
-    answers: [{text:"Clothes",points:26},{text:"Charger",points:22},{text:"Speaker",points:18},{text:"Snacks",points:16},{text:"Camera",points:10},{text:"Cards",points:8}] },
-  { question: "Name a common nickname students call each other.",
-    answers: [{text:"Bro",points:24},{text:"Dude",points:20},{text:"Buddy",points:18},{text:"Da",points:16},{text:"Bhai",points:14},{text:"Boss",points:8}] },
-  { question: "Name something students do to kill time in the hostel.",
-    answers: [{text:"Scroll",points:28},{text:"Sleep",points:22},{text:"Gossip",points:18},{text:"Netflix",points:14},{text:"Cards",points:10},{text:"Music",points:8}] },
-  { question: "Name a genre of music popular among college students.",
-    answers: [{text:"Hip-hop",points:26},{text:"Pop",points:22},{text:"Assamese",points:18},{text:"Bollywood",points:16},{text:"Lo-fi",points:10},{text:"EDM",points:8}] },
-  { question: "Name something you do the night before an assignment is due.",
-    answers: [{text:"Cram",points:28},{text:"Copy",points:22},{text:"Google",points:18},{text:"Stress",points:14},{text:"Cry",points:10},{text:"Panic",points:8}] },
-  { question: "Name a reason students visit the college canteen.",
-    answers: [{text:"Hungry",points:28},{text:"Break",points:22},{text:"Chill",points:18},{text:"Gossip",points:16},{text:"Wifi",points:10},{text:"Bored",points:6}] },
-  { question: "Name something students do on the first rainy day of the season.",
-    answers: [{text:"Selfie",points:26},{text:"Tea",points:22},{text:"Bunk",points:18},{text:"Puddles",points:14},{text:"Pakora",points:12},{text:"Songs",points:8}] }
+  { question: "Name something every fresher is scared of.",
+  answers: [{text:"Seniors",points:30},{text:"Ragging",points:24},{text:"English",points:18},{text:"Friends",points:12},{text:"Attendance",points:10},{text:"Classes",points:6}] },
+
+{ question: "Name the first thing you notice about a classmate.",
+  answers: [{text:"Face",points:30},{text:"Dress",points:24},{text:"Smile",points:18},{text:"Hair",points:12},{text:"Height",points:10},{text:"Shoes",points:6}] },
+
+{ question: "Name something students ask on the first day.",
+  answers: [{text:"Name",points:30},{text:"Department",points:24},{text:"Hostel",points:18},{text:"Hometown",points:12},{text:"Instagram",points:10},{text:"Semester",points:6}] },
+
+{ question: "Name something students secretly judge.",
+  answers: [{text:"Outfit",points:30},{text:"Shoes",points:22},{text:"Accent",points:18},{text:"Phone",points:12},{text:"Hair",points:10},{text:"Bag",points:8}] },
+
+{ question: "Name something students always lose.",
+  answers: [{text:"Pen",points:30},{text:"Charger",points:22},{text:"ID",points:18},{text:"Bottle",points:12},{text:"Wallet",points:10},{text:"Notes",points:8}] },
+
+{ question: "Name something students do before sleeping.",
+  answers: [{text:"Reels",points:30},{text:"Chat",points:22},{text:"Music",points:18},{text:"YouTube",points:14},{text:"Snapchat",points:10},{text:"Gaming",points:6}] },
+
+{ question: "Name something students always refresh.",
+  answers: [{text:"Instagram",points:30},{text:"Snapchat",points:24},{text:"WhatsApp",points:18},{text:"Reels",points:12},{text:"Scores",points:10},{text:"Mail",points:6}] },
+
+{ question: "Name a Gen Z word everyone says.",
+  answers: [{text:"Bro",points:28},{text:"Aura",points:22},{text:"Cringe",points:18},{text:"Slay",points:12},{text:"Sus",points:10},{text:"Delulu",points:10}] },
+
+{ question: "Name something students gossip about.",
+  answers: [{text:"Crush",points:30},{text:"Couples",points:24},{text:"Teachers",points:16},{text:"Friends",points:12},{text:"Results",points:10},{text:"Seniors",points:8}] },
+
+{ question: "Name something students spend too much money on.",
+  answers: [{text:"Food",points:30},{text:"Coffee",points:22},{text:"Shopping",points:18},{text:"Recharge",points:12},{text:"Petrol",points:10},{text:"Trips",points:8}] },
+
+{ question: "Name something every hostel room smells of.",
+  answers: [{text:"Perfume",points:28},{text:"Maggi",points:24},{text:"Shoes",points:18},{text:"Food",points:12},{text:"Spray",points:10},{text:"Laundry",points:8}] },
+
+{ question: "Name something students pretend to understand.",
+  answers: [{text:"Lecture",points:30},{text:"Assignment",points:22},{text:"Math",points:18},{text:"Coding",points:12},{text:"English",points:10},{text:"Rules",points:8}] },
+
+{ question: "Name something students celebrate.",
+  answers: [{text:"Holiday",points:30},{text:"Birthday",points:22},{text:"Fest",points:18},{text:"Victory",points:12},{text:"Weekend",points:10},{text:"Results",points:8}] },
+
+{ question: "Name a sport students never miss.",
+  answers: [{text:"Cricket",points:34},{text:"Football",points:24},{text:"Badminton",points:16},{text:"Kabaddi",points:10},{text:"F1",points:8},{text:"Volleyball",points:8}] },
+
+{ question: "Name something students check during the World Cup.",
+  answers: [{text:"Score",points:30},{text:"Highlights",points:24},{text:"Memes",points:18},{text:"Reels",points:12},{text:"Fantasy",points:10},{text:"Stats",points:6}] },
+
+{ question: "Name something students flex.",
+  answers: [{text:"Phone",points:28},{text:"Snapscore",points:22},{text:"Followers",points:18},{text:"Outfit",points:12},{text:"Shoes",points:10},{text:"Trips",points:10}] }
+   { question: "You hear 'Pradhan Ji'. What comes to mind?",
+  answers: [
+    {text:"Panchayat",points:32},
+    {text:"Sachiv",points:24},
+    {text:"Lauki",points:16},
+    {text:"Vidhayak",points:12},
+    {text:"Phulera",points:10},
+    {text:"Rinki",points:6}
+]},
+
+{ question: "You hear 'Pushpa'. What comes to mind?",
+  answers: [
+    {text:"Jhukega",points:30},
+    {text:"Fire",points:24},
+    {text:"Srivalli",points:18},
+    {text:"Shekhawat",points:12},
+    {text:"Red Sandal",points:10},
+    {text:"Allu",points:6}
+]},
+
+{ question: "You hear 'Spider-Man'. What comes to mind?",
+  answers: [
+    {text:"Web",points:30},
+    {text:"MJ",points:22},
+    {text:"Marvel",points:18},
+    {text:"Tom",points:12},
+    {text:"Mask",points:10},
+    {text:"Swing",points:8}
+]},
+
+{ question: "You hear 'Messi'. What comes to mind?",
+  answers: [
+    {text:"GOAT",points:30},
+    {text:"Argentina",points:24},
+    {text:"Football",points:18},
+    {text:"World Cup",points:12},
+    {text:"Barcelona",points:10},
+    {text:"Inter Miami",points:6}
+]},
+
+{ question: "You hear 'Kohli'. What comes to mind?",
+  answers: [
+    {text:"Cricket",points:30},
+    {text:"RCB",points:24},
+    {text:"Century",points:18},
+    {text:"Aggression",points:12},
+    {text:"Anushka",points:10},
+    {text:"King",points:6}
+]},
+
+{ question: "You hear 'Ronaldo'. What comes to mind?",
+  answers: [
+    {text:"Siuuu",points:32},
+    {text:"GOAT",points:22},
+    {text:"Football",points:18},
+    {text:"Portugal",points:12},
+    {text:"Real Madrid",points:10},
+    {text:"Al Nassr",points:6}
+]},
+
+{ question: "You hear 'Deadpool'. What comes to mind?",
+  answers: [
+    {text:"Marvel",points:30},
+    {text:"Wolverine",points:24},
+    {text:"Ryan",points:18},
+    {text:"Red",points:12},
+    {text:"Comedy",points:10},
+    {text:"Mask",points:6}
+]},
+
+{ question: "You hear 'Wednesday'. What comes to mind?",
+  answers: [
+    {text:"Dance",points:30},
+    {text:"Netflix",points:24},
+    {text:"Black",points:18},
+    {text:"Addams",points:12},
+    {text:"Thing",points:10},
+    {text:"School",points:6}
+]},
+   { question: "Name something that gives you instant aura.",
+  answers: [{text:"Confidence",points:30},{text:"Outfit",points:24},{text:"Perfume",points:18},{text:"Hair",points:12},{text:"Shoes",points:10},{text:"Smile",points:6}] },
+
+{ question: "Name a green flag in a classmate.",
+  answers: [{text:"Kind",points:30},{text:"Funny",points:22},{text:"Helpful",points:18},{text:"Respect",points:14},{text:"Honest",points:10},{text:"Smile",points:6}] },
+
+{ question: "Name a red flag in a classmate.",
+  answers: [{text:"Attitude",points:30},{text:"Arrogant",points:24},{text:"Rude",points:18},{text:"Liar",points:12},{text:"Fake",points:10},{text:"Ego",points:6}] },
+
+{ question: "Name something students flex.",
+  answers: [{text:"Phone",points:28},{text:"Outfit",points:22},{text:"Shoes",points:18},{text:"Snapscore",points:14},{text:"Followers",points:10},{text:"Bike",points:8}] },
+
+{ question: "Name something students stalk.",
+  answers: [{text:"Crush",points:30},{text:"Instagram",points:24},{text:"Ex",points:18},{text:"Story",points:12},{text:"Friends",points:10},{text:"Profile",points:6}] },
+
+{ question: "Name something that instantly kills the vibe.",
+  answers: [{text:"Rain",points:28},{text:"Network",points:22},{text:"Attendance",points:18},{text:"Battery",points:14},{text:"Homework",points:10},{text:"Parents",points:8}] },
+
+{ question: "Name something everyone lies about.",
+  answers: [{text:"Sleep",points:30},{text:"Study",points:24},{text:"Marks",points:18},{text:"Budget",points:12},{text:"Gym",points:10},{text:"Diet",points:6}] },
+
+{ question: "Name something students waste time on.",
+  answers: [{text:"Reels",points:30},{text:"Gaming",points:24},{text:"YouTube",points:18},{text:"Chat",points:12},{text:"Netflix",points:10},{text:"Memes",points:6}] },
+
+{ question: "Name something students secretly compete in.",
+  answers: [{text:"Marks",points:28},{text:"Followers",points:22},{text:"Snapscore",points:18},{text:"Looks",points:14},{text:"Sports",points:10},{text:"Gaming",points:8}] },
+
+{ question: "Name something students do before posting a photo.",
+  answers: [{text:"Filter",points:30},{text:"Edit",points:22},{text:"Caption",points:18},{text:"Crop",points:12},{text:"Retake",points:10},{text:"Music",points:8}] },
+   {
+  question: "Name a singer students play on repeat during heartbreak.",
+  answers: [
+    {text:"Arijit",points:32},
+    {text:"Atif",points:22},
+    {text:"KK",points:18},
+    {text:"Shreya",points:12},
+    {text:"Jubin",points:10},
+    {text:"Anuv",points:6}
+  ]
+},
+
+{
+  question: "Name a singer whose songs everyone knows.",
+  answers: [
+    {text:"Arijit",points:30},
+    {text:"Honey",points:24},
+    {text:"Diljit",points:18},
+    {text:"Shreya",points:12},
+    {text:"KK",points:10},
+    {text:"Atif",points:6}
+  ]
+},
+
+{
+  question: "Name a game students play when they're bored.",
+  answers: [
+    {text:"BGMI",points:30},
+    {text:"Ludo",points:22},
+    {text:"Valorant",points:18},
+    {text:"UNO",points:12},
+    {text:"Chess",points:10},
+    {text:"Minecraft",points:8}
+  ]
+},
+
+{
+  question: "Name a sport that brings everyone together.",
+  answers: [
+    {text:"Cricket",points:34},
+    {text:"Football",points:24},
+    {text:"Badminton",points:16},
+    {text:"Kabaddi",points:10},
+    {text:"Volleyball",points:8},
+    {text:"Basketball",points:8}
+  ]
+},
+
+{
+  question: "Name something students buy after getting their monthly allowance.",
+  answers: [
+    {text:"Food",points:30},
+    {text:"Clothes",points:22},
+    {text:"Shoes",points:18},
+    {text:"Coffee",points:12},
+    {text:"Perfume",points:10},
+    {text:"Recharge",points:8}
+  ]
+},
+
+{
+  question: "Name an app students open when they're avoiding studies.",
+  answers: [
+    {text:"Instagram",points:30},
+    {text:"YouTube",points:24},
+    {text:"Snapchat",points:18},
+    {text:"Spotify",points:12},
+    {text:"WhatsApp",points:10},
+    {text:"Netflix",points:6}
+  ]
+},
+
+{
+  question: "Name something students wear when they want to impress.",
+  answers: [
+    {text:"Sneakers",points:30},
+    {text:"Perfume",points:22},
+    {text:"Watch",points:18},
+    {text:"Jacket",points:12},
+    {text:"Chain",points:10},
+    {text:"Cap",points:8}
+  ]
+}
 ];
 
 /* -------------------------------------------------------------------------
