@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Survey Showdown &mdash; Family Feud Style Game</title>
+
+<!-- Google Fonts: condensed marquee display face + clean body face -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Ambient stage light beams sit behind everything -->
+<div class="stage-lights" aria-hidden="true">
+  <span></span><span></span><span></span><span></span>
+</div>
+
+<!-- ============================= HOME SCREEN ============================= -->
+<section id="screen-home" class="screen active">
+  <div class="marquee-frame">
+    <h1 class="show-title">SURVEY <span>SHOWDOWN</span></h1>
+    <p class="show-subtitle">The top-answers-on-the-board game show</p>
+  </div>
+
+  <nav class="home-menu">
+    <button class="btn btn-primary btn-lg" id="btn-start-game">▶ Start Game</button>
+    <button class="btn btn-secondary btn-lg" id="btn-create-quiz">✎ Create Custom Quiz</button>
+    <button class="btn btn-ghost btn-lg" id="btn-rules">? Rules</button>
+  </nav>
+
+  <p class="home-footer">Fully offline &middot; No sign-up &middot; Play on any device</p>
+</section>
+
+<!-- ============================= RULES SCREEN ============================= -->
+<section id="screen-rules" class="screen">
+  <div class="panel narrow">
+    <h2 class="panel-title">How To Play</h2>
+    <ol class="rules-list">
+      <li><strong>Face-Off.</strong> Each question opens with a face-off &mdash; the host picks whichever team buzzed in first. That team takes control of the board.</li>
+      <li><strong>Answering.</strong> The controlling team calls out an answer &mdash; the host types it in and hits <em>Submit</em>. A match flips that exact card, wherever it sits on the board, and adds its points automatically.</li>
+      <li><strong>Strikes.</strong> A typed answer that doesn't match anything on the board adds a strike automatically. You can also click <em>Add Strike</em> to log a wrong answer by hand. Three strikes flips control to the other team.</li>
+      <li><strong>Reveal Remaining Answers.</strong> At any point, the host can click this to flip every answer still hidden &mdash; handy for wrapping up a round quickly.</li>
+      <li><strong>Pass or Steal.</strong> After 3 strikes, the opposing team chooses to <em>Pass</em> (original team banks their points) or <em>Steal</em> (one guess at any remaining answer &mdash; a hit steals the whole board, a miss gives it to the original team).</li>
+      <li><strong>Scoring.</strong> Whoever has the higher score when all questions are played wins the match!</li>
+    </ol>
+    <button class="btn btn-primary" id="btn-rules-back">Back to Home</button>
+  </div>
+</section>
+
+<!-- ============================= SETUP SCREEN ============================= -->
+<section id="screen-setup" class="screen">
+  <div class="panel">
+    <h2 class="panel-title">Match Setup</h2>
+
+    <div class="setup-grid">
+      <div class="team-setup team-a">
+        <label for="input-team-a">Team A Name</label>
+        <input type="text" id="input-team-a" maxlength="20" value="Team A" />
+      </div>
+      <div class="team-setup team-b">
+        <label for="input-team-b">Team B Name</label>
+        <input type="text" id="input-team-b" maxlength="20" value="Team B" />
+      </div>
+    </div>
+
+    <div class="setup-row">
+      <label>Question Set</label>
+      <div class="chip-group" id="question-source-group">
+        <button class="chip active" data-source="preloaded">Preloaded (20)</button>
+        <button class="chip" data-source="custom">My Custom Quiz</button>
+        <button class="chip" data-source="mix">Mix Both</button>
+      </div>
+      <p class="hint" id="source-hint"></p>
+    </div>
+
+    <div class="setup-row">
+      <label for="input-rounds">Number of Questions</label>
+      <input type="range" id="input-rounds" min="1" max="20" value="5" />
+      <span id="rounds-value">5</span>
+    </div>
+
+    <div class="setup-actions">
+      <button class="btn btn-ghost" id="btn-setup-back">Back</button>
+      <button class="btn btn-primary btn-lg" id="btn-setup-play">Let's Play!</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= QUIZ EDITOR SCREEN ============================= -->
+<section id="screen-editor" class="screen">
+  <div class="panel wide">
+    <h2 class="panel-title">Create Custom Quiz</h2>
+    <p class="hint">Add your own survey questions. They're saved in your browser (localStorage) and reusable any time.</p>
+
+    <div class="editor-form">
+      <label for="edit-question">Survey Question</label>
+      <input type="text" id="edit-question" placeholder="e.g. Name something people do right after waking up" />
+
+      <label>Answers (highest points first is not required &mdash; we sort automatically)</label>
+      <div id="answer-rows" class="answer-rows"></div>
+      <button class="btn btn-ghost btn-sm" id="btn-add-answer-row">+ Add Answer</button>
+
+      <div class="editor-actions">
+        <button class="btn btn-primary" id="btn-save-question">Save Question</button>
+        <span id="editor-status" class="editor-status"></span>
+      </div>
+    </div>
+
+    <h3 class="sub-title">Your Saved Questions <span id="custom-count" class="badge">0</span></h3>
+    <div id="custom-question-list" class="custom-question-list"></div>
+
+    <button class="btn btn-ghost" id="btn-editor-back">Back to Home</button>
+  </div>
+</section>
+
+<!-- ============================= GAME SCREEN ============================= -->
+<section id="screen-game" class="screen">
+
+  <!-- Scoreboard -->
+  <div class="scoreboard">
+    <div class="score-card team-a" id="score-card-a">
+      <div class="score-name" id="score-name-a">Team A</div>
+      <div class="score-value" id="score-value-a">0</div>
+      <div class="control-flag" id="control-flag-a">IN CONTROL</div>
+    </div>
+
+    <div class="center-info">
+      <div class="question-counter" id="question-counter">Question 1 / 5</div>
+      <div class="strikes" id="strikes-display">
+        <span class="strike-x" data-n="1">X</span>
+        <span class="strike-x" data-n="2">X</span>
+        <span class="strike-x" data-n="3">X</span>
+      </div>
+    </div>
+
+    <div class="score-card team-b" id="score-card-b">
+      <div class="score-name" id="score-name-b">Team B</div>
+      <div class="score-value" id="score-value-b">0</div>
+      <div class="control-flag" id="control-flag-b">IN CONTROL</div>
+    </div>
+  </div>
+
+  <!-- Question banner -->
+  <div class="question-banner">
+    <h2 id="question-text">Loading question...</h2>
+    <span class="answers-remaining" id="answers-remaining">0 answers on the board</span>
+  </div>
+
+  <!-- Answer board -->
+  <div class="answer-board" id="answer-board"></div>
+
+  <!-- Guess entry: type the answer the team called out. Matched (case-insensitive,
+       whitespace-tolerant) answers flip in place and score; a miss adds a strike. -->
+  <div class="guess-row" id="guess-row">
+    <input type="text" id="input-guess" class="guess-input" placeholder="Type the team's answer…" autocomplete="off" disabled />
+    <button class="btn btn-primary" id="btn-submit-guess" disabled>Submit Answer</button>
+  </div>
+
+  <!-- Host controls -->
+  <div class="host-controls" id="host-controls">
+    <button class="btn btn-danger" id="btn-strike" disabled>Add Strike ✕</button>
+    <button class="btn btn-ghost" id="btn-reveal-remaining" disabled>Reveal Remaining Answers</button>
+    <button class="btn btn-ghost" id="btn-next-question" style="display:none;">Next Question →</button>
+  </div>
+
+  <button class="btn btn-ghost btn-sm quit-btn" id="btn-quit">Quit to Home</button>
+</section>
+
+<!-- Face-off overlay -->
+<div class="overlay" id="overlay-faceoff">
+  <div class="overlay-panel">
+    <h2>Face-Off!</h2>
+    <p>Which team buzzed in first?</p>
+    <div class="overlay-actions">
+      <button class="btn btn-primary btn-lg" id="btn-faceoff-a"></button>
+      <button class="btn btn-primary btn-lg" id="btn-faceoff-b"></button>
+    </div>
+  </div>
+</div>
+
+<!-- Pass/Steal overlay -->
+<div class="overlay" id="overlay-steal">
+  <div class="overlay-panel">
+    <h2>3 Strikes!</h2>
+    <p id="steal-prompt">Team B, do you want to Pass or Steal?</p>
+    <div class="overlay-actions">
+      <button class="btn btn-secondary btn-lg" id="btn-pass">Pass</button>
+      <button class="btn btn-primary btn-lg" id="btn-steal">Steal</button>
+    </div>
+  </div>
+</div>
+
+<!-- Steal result overlay (one typed guess, judged against the hidden answers) -->
+<div class="overlay" id="overlay-steal-judge">
+  <div class="overlay-panel">
+    <h2>Steal Attempt</h2>
+    <p>Type the one answer the team called out.</p>
+    <div class="guess-row">
+      <input type="text" id="input-steal-guess" class="guess-input" placeholder="Type their answer…" autocomplete="off" />
+      <button class="btn btn-primary" id="btn-steal-hit">Check Answer</button>
+    </div>
+    <div class="overlay-actions">
+      <button class="btn btn-danger btn-lg" id="btn-steal-miss">✕ Steal Failed / Clearly Wrong</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================= END SCREEN ============================= -->
+<section id="screen-end" class="screen">
+  <div class="panel narrow end-panel">
+    <div class="trophy">🏆</div>
+    <h2 class="panel-title" id="winner-title">Team A Wins!</h2>
+    <div class="final-scores">
+      <div><span id="end-name-a">Team A</span>: <strong id="end-score-a">0</strong></div>
+      <div><span id="end-name-b">Team B</span>: <strong id="end-score-b">0</strong></div>
+    </div>
+    <button class="btn btn-primary btn-lg" id="btn-play-again">Play Again</button>
+    <button class="btn btn-ghost" id="btn-end-home">Back to Home</button>
+  </div>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
