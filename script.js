@@ -63,8 +63,9 @@ const PRELOADED_QUESTIONS = [
   answers: [{text:"Score",points:30},{text:"Highlights",points:24},{text:"Memes",points:18},{text:"Reels",points:12},{text:"Fantasy",points:10},{text:"Stats",points:6}] },
 
 { question: "Name something students flex.",
-  answers: [{text:"Phone",points:28},{text:"Snapscore",points:22},{text:"Followers",points:18},{text:"Outfit",points:12},{text:"Shoes",points:10},{text:"Trips",points:10}] }
-   { question: "You hear 'Pradhan Ji'. What comes to mind?",
+  answers: [{text:"Phone",points:28},{text:"Snapscore",points:22},{text:"Followers",points:18},{text:"Outfit",points:12},{text:"Shoes",points:10},{text:"Trips",points:10}] },
+
+{ question: "You hear 'Pradhan Ji'. What comes to mind?",
   answers: [
     {text:"Panchayat",points:32},
     {text:"Sachiv",points:24},
