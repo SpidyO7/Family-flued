@@ -12,250 +12,117 @@
 
 /* -------------------------------------------------------------------------
    1. PRELOADED QUESTION BANK
-   Campus-life survey questions written for college students (~70% Assamese,
-   ~30% wider Northeast). Short, natural, one-to-two-word answers — the way
-   100 real students on campus would actually blurt them out.
+   52 deduped, freshers-event-tested survey questions for a college crowd
+   (~70% Assamese/Northeast student life, culture, food, festivals, slang;
+   ~30% universally relatable campus/genz/pop-culture). Every answer object
+   is { text, points, aliases } — aliases feed the matching engine below but
+   are NEVER shown on the board; only .text is ever revealed.
    ------------------------------------------------------------------------- */
 const PRELOADED_QUESTIONS = [
   { question: "Name something every fresher is scared of.",
-  answers: [{text:"Seniors",points:30},{text:"Ragging",points:24},{text:"English",points:18},{text:"Friends",points:12},{text:"Attendance",points:10},{text:"Classes",points:6}] },
-
-{ question: "Name the first thing you notice about a classmate.",
-  answers: [{text:"Face",points:30},{text:"Dress",points:24},{text:"Smile",points:18},{text:"Hair",points:12},{text:"Height",points:10},{text:"Shoes",points:6}] },
-
-{ question: "Name something students ask on the first day.",
-  answers: [{text:"Name",points:30},{text:"Department",points:24},{text:"Hostel",points:18},{text:"Hometown",points:12},{text:"Instagram",points:10},{text:"Semester",points:6}] },
-
-{ question: "Name something students secretly judge.",
-  answers: [{text:"Outfit",points:30},{text:"Shoes",points:22},{text:"Accent",points:18},{text:"Phone",points:12},{text:"Hair",points:10},{text:"Bag",points:8}] },
-
-{ question: "Name something students always lose.",
-  answers: [{text:"Pen",points:30},{text:"Charger",points:22},{text:"ID",points:18},{text:"Bottle",points:12},{text:"Wallet",points:10},{text:"Notes",points:8}] },
-
-{ question: "Name something students do before sleeping.",
-  answers: [{text:"Reels",points:30},{text:"Chat",points:22},{text:"Music",points:18},{text:"YouTube",points:14},{text:"Snapchat",points:10},{text:"Gaming",points:6}] },
-
-{ question: "Name something students always refresh.",
-  answers: [{text:"Instagram",points:30},{text:"Snapchat",points:24},{text:"WhatsApp",points:18},{text:"Reels",points:12},{text:"Scores",points:10},{text:"Mail",points:6}] },
-
-{ question: "Name a Gen Z word everyone says.",
-  answers: [{text:"Bro",points:28},{text:"Aura",points:22},{text:"Cringe",points:18},{text:"Slay",points:12},{text:"Sus",points:10},{text:"Delulu",points:10}] },
-
-{ question: "Name something students gossip about.",
-  answers: [{text:"Crush",points:30},{text:"Couples",points:24},{text:"Teachers",points:16},{text:"Friends",points:12},{text:"Results",points:10},{text:"Seniors",points:8}] },
-
-{ question: "Name something students spend too much money on.",
-  answers: [{text:"Food",points:30},{text:"Coffee",points:22},{text:"Shopping",points:18},{text:"Recharge",points:12},{text:"Petrol",points:10},{text:"Trips",points:8}] },
-
-{ question: "Name something every hostel room smells of.",
-  answers: [{text:"Perfume",points:28},{text:"Maggi",points:24},{text:"Shoes",points:18},{text:"Food",points:12},{text:"Spray",points:10},{text:"Laundry",points:8}] },
-
-{ question: "Name something students pretend to understand.",
-  answers: [{text:"Lecture",points:30},{text:"Assignment",points:22},{text:"Math",points:18},{text:"Coding",points:12},{text:"English",points:10},{text:"Rules",points:8}] },
-
-{ question: "Name something students celebrate.",
-  answers: [{text:"Holiday",points:30},{text:"Birthday",points:22},{text:"Fest",points:18},{text:"Victory",points:12},{text:"Weekend",points:10},{text:"Results",points:8}] },
-
-{ question: "Name a sport students never miss.",
-  answers: [{text:"Cricket",points:34},{text:"Football",points:24},{text:"Badminton",points:16},{text:"Kabaddi",points:10},{text:"F1",points:8},{text:"Volleyball",points:8}] },
-
-{ question: "Name something students check during the World Cup.",
-  answers: [{text:"Score",points:30},{text:"Highlights",points:24},{text:"Memes",points:18},{text:"Reels",points:12},{text:"Fantasy",points:10},{text:"Stats",points:6}] },
-
-{ question: "Name something students flex.",
-  answers: [{text:"Phone",points:28},{text:"Snapscore",points:22},{text:"Followers",points:18},{text:"Outfit",points:12},{text:"Shoes",points:10},{text:"Trips",points:10}] },
-
-{ question: "You hear 'Pradhan Ji'. What comes to mind?",
-  answers: [
-    {text:"Panchayat",points:32},
-    {text:"Sachiv",points:24},
-    {text:"Lauki",points:16},
-    {text:"Vidhayak",points:12},
-    {text:"Phulera",points:10},
-    {text:"Rinki",points:6}
-]},
-
-{ question: "You hear 'Pushpa'. What comes to mind?",
-  answers: [
-    {text:"Jhukega",points:30},
-    {text:"Fire",points:24},
-    {text:"Srivalli",points:18},
-    {text:"Shekhawat",points:12},
-    {text:"Red Sandal",points:10},
-    {text:"Allu",points:6}
-]},
-
-{ question: "You hear 'Spider-Man'. What comes to mind?",
-  answers: [
-    {text:"Web",points:30},
-    {text:"MJ",points:22},
-    {text:"Marvel",points:18},
-    {text:"Tom",points:12},
-    {text:"Mask",points:10},
-    {text:"Swing",points:8}
-]},
-
-{ question: "You hear 'Messi'. What comes to mind?",
-  answers: [
-    {text:"GOAT",points:30},
-    {text:"Argentina",points:24},
-    {text:"Football",points:18},
-    {text:"World Cup",points:12},
-    {text:"Barcelona",points:10},
-    {text:"Inter Miami",points:6}
-]},
-
-{ question: "You hear 'Kohli'. What comes to mind?",
-  answers: [
-    {text:"Cricket",points:30},
-    {text:"RCB",points:24},
-    {text:"Century",points:18},
-    {text:"Aggression",points:12},
-    {text:"Anushka",points:10},
-    {text:"King",points:6}
-]},
-
-{ question: "You hear 'Ronaldo'. What comes to mind?",
-  answers: [
-    {text:"Siuuu",points:32},
-    {text:"GOAT",points:22},
-    {text:"Football",points:18},
-    {text:"Portugal",points:12},
-    {text:"Real Madrid",points:10},
-    {text:"Al Nassr",points:6}
-]},
-
-{ question: "You hear 'Deadpool'. What comes to mind?",
-  answers: [
-    {text:"Marvel",points:30},
-    {text:"Wolverine",points:24},
-    {text:"Ryan",points:18},
-    {text:"Red",points:12},
-    {text:"Comedy",points:10},
-    {text:"Mask",points:6}
-]},
-
-{ question: "You hear 'Wednesday'. What comes to mind?",
-  answers: [
-    {text:"Dance",points:30},
-    {text:"Netflix",points:24},
-    {text:"Black",points:18},
-    {text:"Addams",points:12},
-    {text:"Thing",points:10},
-    {text:"School",points:6}
-]},
-   { question: "Name something that gives you instant aura.",
-  answers: [{text:"Confidence",points:30},{text:"Outfit",points:24},{text:"Perfume",points:18},{text:"Hair",points:12},{text:"Shoes",points:10},{text:"Smile",points:6}] },
-
-{ question: "Name a green flag in a classmate.",
-  answers: [{text:"Kind",points:30},{text:"Funny",points:22},{text:"Helpful",points:18},{text:"Respect",points:14},{text:"Honest",points:10},{text:"Smile",points:6}] },
-
-{ question: "Name a red flag in a classmate.",
-  answers: [{text:"Attitude",points:30},{text:"Arrogant",points:24},{text:"Rude",points:18},{text:"Liar",points:12},{text:"Fake",points:10},{text:"Ego",points:6}] },
-
-{ question: "Name something students flex.",
-  answers: [{text:"Phone",points:28},{text:"Outfit",points:22},{text:"Shoes",points:18},{text:"Snapscore",points:14},{text:"Followers",points:10},{text:"Bike",points:8}] },
-
-{ question: "Name something students stalk.",
-  answers: [{text:"Crush",points:30},{text:"Instagram",points:24},{text:"Ex",points:18},{text:"Story",points:12},{text:"Friends",points:10},{text:"Profile",points:6}] },
-
-{ question: "Name something that instantly kills the vibe.",
-  answers: [{text:"Rain",points:28},{text:"Network",points:22},{text:"Attendance",points:18},{text:"Battery",points:14},{text:"Homework",points:10},{text:"Parents",points:8}] },
-
-{ question: "Name something everyone lies about.",
-  answers: [{text:"Sleep",points:30},{text:"Study",points:24},{text:"Marks",points:18},{text:"Budget",points:12},{text:"Gym",points:10},{text:"Diet",points:6}] },
-
-{ question: "Name something students waste time on.",
-  answers: [{text:"Reels",points:30},{text:"Gaming",points:24},{text:"YouTube",points:18},{text:"Chat",points:12},{text:"Netflix",points:10},{text:"Memes",points:6}] },
-
-{ question: "Name something students secretly compete in.",
-  answers: [{text:"Marks",points:28},{text:"Followers",points:22},{text:"Snapscore",points:18},{text:"Looks",points:14},{text:"Sports",points:10},{text:"Gaming",points:8}] },
-
-{ question: "Name something students do before posting a photo.",
-  answers: [{text:"Filter",points:30},{text:"Edit",points:22},{text:"Caption",points:18},{text:"Crop",points:12},{text:"Retake",points:10},{text:"Music",points:8}] },
-   {
-  question: "Name a singer students play on repeat during heartbreak.",
-  answers: [
-    {text:"Arijit",points:32},
-    {text:"Atif",points:22},
-    {text:"KK",points:18},
-    {text:"Shreya",points:12},
-    {text:"Jubin",points:10},
-    {text:"Anuv",points:6}
-  ]
-},
-
-{
-  question: "Name a singer whose songs everyone knows.",
-  answers: [
-    {text:"Arijit",points:30},
-    {text:"Honey",points:24},
-    {text:"Diljit",points:18},
-    {text:"Shreya",points:12},
-    {text:"KK",points:10},
-    {text:"Atif",points:6}
-  ]
-},
-
-{
-  question: "Name a game students play when they're bored.",
-  answers: [
-    {text:"BGMI",points:30},
-    {text:"Ludo",points:22},
-    {text:"Valorant",points:18},
-    {text:"UNO",points:12},
-    {text:"Chess",points:10},
-    {text:"Minecraft",points:8}
-  ]
-},
-
-{
-  question: "Name a sport that brings everyone together.",
-  answers: [
-    {text:"Cricket",points:34},
-    {text:"Football",points:24},
-    {text:"Badminton",points:16},
-    {text:"Kabaddi",points:10},
-    {text:"Volleyball",points:8},
-    {text:"Basketball",points:8}
-  ]
-},
-
-{
-  question: "Name something students buy after getting their monthly allowance.",
-  answers: [
-    {text:"Food",points:30},
-    {text:"Clothes",points:22},
-    {text:"Shoes",points:18},
-    {text:"Coffee",points:12},
-    {text:"Perfume",points:10},
-    {text:"Recharge",points:8}
-  ]
-},
-
-{
-  question: "Name an app students open when they're avoiding studies.",
-  answers: [
-    {text:"Instagram",points:30},
-    {text:"YouTube",points:24},
-    {text:"Snapchat",points:18},
-    {text:"Spotify",points:12},
-    {text:"WhatsApp",points:10},
-    {text:"Netflix",points:6}
-  ]
-},
-
-{
-  question: "Name something students wear when they want to impress.",
-  answers: [
-    {text:"Sneakers",points:30},
-    {text:"Perfume",points:22},
-    {text:"Watch",points:18},
-    {text:"Jacket",points:12},
-    {text:"Chain",points:10},
-    {text:"Cap",points:8}
-  ]
-}
+    answers: [{text:"Seniors",points:30,aliases:["senior"]},{text:"Ragging",points:24,aliases:[]},{text:"English",points:18,aliases:[]},{text:"Friends",points:12,aliases:[]},{text:"Attendance",points:10,aliases:[]},{text:"Classes",points:6,aliases:[]}] },
+  { question: "Name the first thing you notice about a classmate.",
+    answers: [{text:"Face",points:30,aliases:[]},{text:"Dress",points:24,aliases:[]},{text:"Smile",points:18,aliases:[]},{text:"Hair",points:12,aliases:[]},{text:"Height",points:10,aliases:[]},{text:"Shoes",points:6,aliases:["sneakers", "sneaker"]}] },
+  { question: "Name something students ask on the first day.",
+    answers: [{text:"Name",points:30,aliases:[]},{text:"Department",points:24,aliases:[]},{text:"Hostel",points:18,aliases:[]},{text:"Hometown",points:12,aliases:[]},{text:"Instagram",points:10,aliases:["insta", "ig"]},{text:"Semester",points:6,aliases:[]}] },
+  { question: "Name something students secretly judge.",
+    answers: [{text:"Outfit",points:30,aliases:["clothes", "dress", "dresses"]},{text:"Shoes",points:22,aliases:["sneakers", "sneaker"]},{text:"Accent",points:18,aliases:[]},{text:"Phone",points:12,aliases:["mobile", "smartphone", "cell", "cellphone"]},{text:"Hair",points:10,aliases:[]},{text:"Bag",points:8,aliases:[]}] },
+  { question: "Name something students always lose.",
+    answers: [{text:"Pen",points:30,aliases:[]},{text:"Charger",points:22,aliases:["chargers", "cable", "wire"]},{text:"ID",points:18,aliases:["id card", "identity card"]},{text:"Bottle",points:12,aliases:["water bottle"]},{text:"Wallet",points:10,aliases:["purse"]},{text:"Notes",points:8,aliases:["note", "notebook"]}] },
+  { question: "Name something students do before sleeping.",
+    answers: [{text:"Reels",points:30,aliases:["instagram reels", "insta reels"]},{text:"Chat",points:22,aliases:[]},{text:"Music",points:18,aliases:["song", "songs"]},{text:"YouTube",points:14,aliases:["you tube", "yt"]},{text:"Snapchat",points:10,aliases:["snap"]},{text:"Gaming",points:6,aliases:["games", "game", "gambling online"]}] },
+  { question: "Name something students always refresh.",
+    answers: [{text:"Instagram",points:30,aliases:["insta", "ig"]},{text:"Snapchat",points:24,aliases:["snap"]},{text:"WhatsApp",points:18,aliases:["whats app", "wp"]},{text:"News",points:12,aliases:[]},{text:"Scores",points:10,aliases:[]},{text:"Mail",points:6,aliases:[]}] },
+  { question: "Name a Gen Z word everyone says.",
+    answers: [{text:"Bro",points:28,aliases:[]},{text:"Aura",points:22,aliases:["auraa"]},{text:"Cringe",points:18,aliases:[]},{text:"Slay",points:12,aliases:[]},{text:"Sus",points:10,aliases:["suspicious"]},{text:"Delulu",points:10,aliases:["delusional"]}] },
+  { question: "Name something students gossip about.",
+    answers: [{text:"Crush",points:30,aliases:[]},{text:"Couples",points:24,aliases:[]},{text:"Teachers",points:16,aliases:[]},{text:"Friends",points:12,aliases:[]},{text:"Results",points:10,aliases:[]},{text:"Seniors",points:8,aliases:["senior"]}] },
+  { question: "Name something students spend too much money on.",
+    answers: [{text:"Food",points:30,aliases:[]},{text:"Coffee",points:22,aliases:["cafe coffee", "cold coffee"]},{text:"Shopping",points:18,aliases:[]},{text:"Recharge",points:12,aliases:["mobile recharge", "topup", "top up"]},{text:"Petrol",points:10,aliases:[]},{text:"Trips",points:8,aliases:[]}] },
+  { question: "Name something every hostel room smells of.",
+    answers: [{text:"Perfume",points:28,aliases:["deo", "deodorant"]},{text:"Maggi",points:24,aliases:[]},{text:"Shoes",points:18,aliases:["sneakers", "sneaker"]},{text:"Food",points:12,aliases:[]},{text:"Spray",points:10,aliases:["deo spray", "body spray"]},{text:"Laundry",points:8,aliases:[]}] },
+  { question: "Name something students pretend to understand.",
+    answers: [{text:"Lecture",points:30,aliases:[]},{text:"Assignment",points:22,aliases:[]},{text:"Math",points:18,aliases:[]},{text:"Coding",points:12,aliases:["code", "programming"]},{text:"English",points:10,aliases:[]},{text:"Rules",points:8,aliases:[]}] },
+  { question: "Name something students throw a party for.",
+    answers: [{text:"Birthday",points:30,aliases:[]},{text:"Results",points:22,aliases:[]},{text:"Fest",points:18,aliases:[]},{text:"Victory",points:14,aliases:[]},{text:"Weekend",points:10,aliases:[]},{text:"Farewell",points:6,aliases:[]}] },
+  { question: "Name a sport students never miss.",
+    answers: [{text:"Cricket",points:34,aliases:["cricket match"]},{text:"Football",points:24,aliases:["soccer"]},{text:"Badminton",points:16,aliases:[]},{text:"Kabaddi",points:10,aliases:[]},{text:"F1",points:8,aliases:[]},{text:"Volleyball",points:8,aliases:[]}] },
+  { question: "Name something students check during the World Cup.",
+    answers: [{text:"Score",points:30,aliases:[]},{text:"Highlights",points:24,aliases:[]},{text:"Memes",points:18,aliases:[]},{text:"Reels",points:12,aliases:["instagram reels", "insta reels"]},{text:"Fantasy",points:10,aliases:[]},{text:"Stats",points:6,aliases:[]}] },
+  { question: "Name something students flex.",
+    answers: [{text:"Phone",points:28,aliases:["mobile", "smartphone", "cell", "cellphone"]},{text:"Outfit",points:22,aliases:["clothes", "dress", "dresses"]},{text:"Shoes",points:18,aliases:["sneakers", "sneaker"]},{text:"Snapscore",points:14,aliases:["snap score", "snap streak"]},{text:"Followers",points:10,aliases:[]},{text:"Bike",points:8,aliases:[]}] },
+  { question: "You hear 'Pradhan Ji'. What comes to mind?",
+    answers: [{text:"Panchayat",points:32,aliases:[]},{text:"Sachiv",points:24,aliases:[]},{text:"Lauki",points:16,aliases:[]},{text:"Vidhayak",points:12,aliases:[]},{text:"Phulera",points:10,aliases:[]},{text:"Rinki",points:6,aliases:[]}] },
+  { question: "You hear 'Pushpa'. What comes to mind?",
+    answers: [{text:"Jhukega",points:30,aliases:[]},{text:"Fire",points:24,aliases:[]},{text:"Srivalli",points:18,aliases:[]},{text:"Shekhawat",points:12,aliases:[]},{text:"Red Sandal",points:10,aliases:[]},{text:"Allu",points:6,aliases:[]}] },
+  { question: "You hear 'Spider-Man'. What comes to mind?",
+    answers: [{text:"Web",points:30,aliases:[]},{text:"MJ",points:22,aliases:[]},{text:"Marvel",points:18,aliases:[]},{text:"Tom",points:12,aliases:[]},{text:"Mask",points:10,aliases:[]},{text:"Swing",points:8,aliases:[]}] },
+  { question: "You hear 'Messi'. What comes to mind?",
+    answers: [{text:"GOAT",points:30,aliases:[]},{text:"Argentina",points:24,aliases:[]},{text:"Football",points:18,aliases:["soccer"]},{text:"World Cup",points:12,aliases:[]},{text:"Barcelona",points:10,aliases:[]},{text:"Inter Miami",points:6,aliases:[]}] },
+  { question: "You hear 'Kohli'. What comes to mind?",
+    answers: [{text:"Cricket",points:30,aliases:["cricket match"]},{text:"RCB",points:24,aliases:[]},{text:"Century",points:18,aliases:[]},{text:"Aggression",points:12,aliases:[]},{text:"Anushka",points:10,aliases:[]},{text:"King",points:6,aliases:[]}] },
+  { question: "You hear 'Ronaldo'. What comes to mind?",
+    answers: [{text:"Siuuu",points:32,aliases:[]},{text:"GOAT",points:22,aliases:[]},{text:"Football",points:18,aliases:["soccer"]},{text:"Portugal",points:12,aliases:[]},{text:"Real Madrid",points:10,aliases:[]},{text:"Al Nassr",points:6,aliases:[]}] },
+  { question: "You hear 'Deadpool'. What comes to mind?",
+    answers: [{text:"Marvel",points:30,aliases:[]},{text:"Wolverine",points:24,aliases:[]},{text:"Ryan",points:18,aliases:[]},{text:"Red",points:12,aliases:[]},{text:"Comedy",points:10,aliases:[]},{text:"Mask",points:6,aliases:[]}] },
+  { question: "You hear 'Wednesday'. What comes to mind?",
+    answers: [{text:"Dance",points:30,aliases:[]},{text:"Netflix",points:24,aliases:["net flix"]},{text:"Black",points:18,aliases:[]},{text:"Addams",points:12,aliases:[]},{text:"Thing",points:10,aliases:[]},{text:"School",points:6,aliases:[]}] },
+  { question: "Name something that gives you instant aura.",
+    answers: [{text:"Confidence",points:30,aliases:[]},{text:"Outfit",points:24,aliases:["clothes", "dress", "dresses"]},{text:"Perfume",points:18,aliases:["deo", "deodorant"]},{text:"Hair",points:12,aliases:[]},{text:"Shoes",points:10,aliases:["sneakers", "sneaker"]},{text:"Smile",points:6,aliases:[]}] },
+  { question: "Name a green flag in a classmate.",
+    answers: [{text:"Kind",points:30,aliases:[]},{text:"Funny",points:22,aliases:[]},{text:"Helpful",points:18,aliases:[]},{text:"Respect",points:14,aliases:[]},{text:"Honest",points:10,aliases:[]},{text:"Smile",points:6,aliases:[]}] },
+  { question: "Name a red flag in a classmate.",
+    answers: [{text:"Attitude",points:30,aliases:["attitude problem"]},{text:"Arrogant",points:24,aliases:["arrogance"]},{text:"Rude",points:18,aliases:[]},{text:"Liar",points:12,aliases:[]},{text:"Fake",points:10,aliases:[]},{text:"Ego",points:6,aliases:[]}] },
+  { question: "Name something students stalk.",
+    answers: [{text:"Crush",points:30,aliases:[]},{text:"Instagram",points:24,aliases:["insta", "ig"]},{text:"Ex",points:18,aliases:[]},{text:"Story",points:12,aliases:[]},{text:"Friends",points:10,aliases:[]},{text:"Profile",points:6,aliases:[]}] },
+  { question: "Name something that instantly kills the vibe.",
+    answers: [{text:"Rain",points:28,aliases:[]},{text:"Network",points:22,aliases:["signal", "no network"]},{text:"Attendance",points:18,aliases:[]},{text:"Battery",points:14,aliases:["low battery", "charge"]},{text:"Homework",points:10,aliases:[]},{text:"Parents",points:8,aliases:[]}] },
+  { question: "Name something everyone lies about.",
+    answers: [{text:"Sleep",points:30,aliases:[]},{text:"Study",points:24,aliases:[]},{text:"Marks",points:18,aliases:[]},{text:"Budget",points:12,aliases:[]},{text:"Gym",points:10,aliases:[]},{text:"Diet",points:6,aliases:[]}] },
+  { question: "Name something students promise to stop but never do.",
+    answers: [{text:"Reels",points:30,aliases:["instagram reels", "insta reels"]},{text:"Gaming",points:24,aliases:["games", "game", "gambling online"]},{text:"YouTube",points:18,aliases:["you tube", "yt"]},{text:"Junk food",points:12,aliases:[]},{text:"Netflix",points:10,aliases:["net flix"]},{text:"Memes",points:6,aliases:[]}] },
+  { question: "Name something students secretly compete in.",
+    answers: [{text:"Marks",points:28,aliases:[]},{text:"Followers",points:22,aliases:[]},{text:"Snapscore",points:18,aliases:["snap score", "snap streak"]},{text:"Looks",points:14,aliases:[]},{text:"Sports",points:10,aliases:[]},{text:"Gaming",points:8,aliases:["games", "game", "gambling online"]}] },
+  { question: "Name something students do before posting a photo.",
+    answers: [{text:"Filter",points:30,aliases:[]},{text:"Edit",points:22,aliases:[]},{text:"Caption",points:18,aliases:[]},{text:"Crop",points:12,aliases:[]},{text:"Retake",points:10,aliases:[]},{text:"Music",points:8,aliases:["song", "songs"]}] },
+  { question: "Name a singer students play on repeat during heartbreak.",
+    answers: [{text:"Arijit",points:32,aliases:["arijit singh"]},{text:"Atif",points:22,aliases:["atif aslam"]},{text:"KK",points:18,aliases:["k k"]},{text:"Shreya",points:12,aliases:["shreya ghoshal"]},{text:"Jubin",points:10,aliases:["jubin garg", "zubeen garg"]},{text:"Anuv",points:6,aliases:[]}] },
+  { question: "Name a singer played at every college DJ night.",
+    answers: [{text:"Arijit",points:30,aliases:["arijit singh"]},{text:"Honey",points:24,aliases:[]},{text:"Diljit",points:18,aliases:["diljit dosanjh"]},{text:"Shreya",points:12,aliases:["shreya ghoshal"]},{text:"KK",points:10,aliases:["k k"]},{text:"Atif",points:6,aliases:["atif aslam"]}] },
+  { question: "Name a game students play when they're bored.",
+    answers: [{text:"BGMI",points:30,aliases:["pubg"]},{text:"Ludo",points:22,aliases:[]},{text:"Valorant",points:18,aliases:[]},{text:"UNO",points:12,aliases:[]},{text:"Chess",points:10,aliases:[]},{text:"Minecraft",points:8,aliases:[]}] },
+  { question: "Name a sport played every evening on the college ground.",
+    answers: [{text:"Cricket",points:34,aliases:["cricket match"]},{text:"Football",points:24,aliases:["soccer"]},{text:"Badminton",points:16,aliases:[]},{text:"Kabaddi",points:10,aliases:[]},{text:"Volleyball",points:8,aliases:[]},{text:"Basketball",points:8,aliases:[]}] },
+  { question: "Name something students buy after getting their monthly allowance.",
+    answers: [{text:"Food",points:30,aliases:[]},{text:"Clothes",points:22,aliases:[]},{text:"Shoes",points:18,aliases:["sneakers", "sneaker"]},{text:"Coffee",points:12,aliases:["cafe coffee", "cold coffee"]},{text:"Perfume",points:10,aliases:["deo", "deodorant"]},{text:"Recharge",points:8,aliases:["mobile recharge", "topup", "top up"]}] },
+  { question: "Name an app students open when they're avoiding studies.",
+    answers: [{text:"Instagram",points:30,aliases:["insta", "ig"]},{text:"YouTube",points:24,aliases:["you tube", "yt"]},{text:"Snapchat",points:18,aliases:["snap"]},{text:"Spotify",points:12,aliases:[]},{text:"WhatsApp",points:10,aliases:["whats app", "wp"]},{text:"Netflix",points:6,aliases:["net flix"]}] },
+  { question: "Name something students wear when they want to impress.",
+    answers: [{text:"Sneakers",points:30,aliases:[]},{text:"Perfume",points:22,aliases:["deo", "deodorant"]},{text:"Watch",points:18,aliases:[]},{text:"Jacket",points:12,aliases:[]},{text:"Chain",points:10,aliases:[]},{text:"Cap",points:8,aliases:[]}] },
+  { question: "Name a snack every college canteen sells.",
+    answers: [{text:"Momo",points:30,aliases:["momos"]},{text:"Maggi",points:26,aliases:[]},{text:"Samosa",points:18,aliases:[]},{text:"Tea",points:14,aliases:["chai"]},{text:"Chowmein",points:8,aliases:[]},{text:"Roll",points:4,aliases:[]}] },
+  { question: "Name something you'll hear blasting during Bihu.",
+    answers: [{text:"Dhol",points:30,aliases:[]},{text:"Pepa",points:24,aliases:[]},{text:"Gogona",points:18,aliases:[]},{text:"Xutuli",points:12,aliases:[]},{text:"Toka",points:10,aliases:[]},{text:"DJ",points:6,aliases:[]}] },
+  { question: "Name a Bihu outfit every student owns.",
+    answers: [{text:"Gamosa",points:30,aliases:["gamocha"]},{text:"Mekhela",points:22,aliases:["mekhela sador", "mekhela chador"]},{text:"Jaapi",points:18,aliases:["japi"]},{text:"Dhoti",points:14,aliases:[]},{text:"Kurta",points:10,aliases:[]},{text:"Sador",points:6,aliases:[]}] },
+  { question: "Name a hill station students plan a trip to.",
+    answers: [{text:"Shillong",points:30,aliases:[]},{text:"Tawang",points:22,aliases:[]},{text:"Kohima",points:18,aliases:[]},{text:"Ziro",points:14,aliases:[]},{text:"Kalimpong",points:10,aliases:[]},{text:"Cherrapunji",points:6,aliases:[]}] },
+  { question: "Name something every tea stall near college sells.",
+    answers: [{text:"Tea",points:30,aliases:["chai"]},{text:"Biscuit",points:22,aliases:[]},{text:"Samosa",points:18,aliases:[]},{text:"Bun",points:14,aliases:[]},{text:"Cigarette",points:10,aliases:["smoke", "smoking", "cigarettes", "ciggy"]},{text:"Maggi",points:6,aliases:[]}] },
+  { question: "Name something you can't survive Assam's monsoon without.",
+    answers: [{text:"Umbrella",points:30,aliases:[]},{text:"Raincoat",points:22,aliases:[]},{text:"Boots",points:18,aliases:[]},{text:"Jacket",points:14,aliases:[]},{text:"Bunk",points:8,aliases:[]},{text:"Tea",points:8,aliases:["chai"]}] },
+  { question: "Name something students eat during a college Bihu function.",
+    answers: [{text:"Pitha",points:30,aliases:["pithas"]},{text:"Laru",points:24,aliases:[]},{text:"Jolpan",points:18,aliases:[]},{text:"Chira",points:14,aliases:[]},{text:"Curd",points:8,aliases:[]},{text:"Payash",points:6,aliases:[]}] },
+  { question: "Name a popular local transport students use to reach college.",
+    answers: [{text:"Auto",points:30,aliases:["auto rickshaw", "rickshaw"]},{text:"Bus",points:24,aliases:["city bus"]},{text:"Bike",points:18,aliases:[]},{text:"Cycle",points:12,aliases:[]},{text:"Sumo",points:10,aliases:["tata sumo"]},{text:"Walk",points:6,aliases:[]}] },
+  { question: "Name something you'd spot on a trip to Kaziranga.",
+    answers: [{text:"Rhino",points:34,aliases:["rhinoceros"]},{text:"Elephant",points:24,aliases:[]},{text:"Jeep",points:18,aliases:[]},{text:"Grass",points:12,aliases:[]},{text:"Bird",points:8,aliases:[]},{text:"Guide",points:4,aliases:[]}] },
+  { question: "Name a festival students look forward to on campus.",
+    answers: [{text:"Bihu",points:30,aliases:[]},{text:"Durga Puja",points:24,aliases:[]},{text:"Diwali",points:18,aliases:[]},{text:"Saraswati Puja",points:14,aliases:[]},{text:"Freshers",points:10,aliases:[]},{text:"Fest",points:4,aliases:[]}] },
+  { question: "Name something every Assamese kitchen has.",
+    answers: [{text:"Rice",points:28,aliases:[]},{text:"Fish",points:22,aliases:[]},{text:"Khar",points:18,aliases:[]},{text:"Oil",points:14,aliases:[]},{text:"Tenga",points:10,aliases:[]},{text:"Bamboo",points:8,aliases:[]}] },
+  { question: "Name a word Assamese students use a lot with friends.",
+    answers: [{text:"Da",points:26,aliases:[]},{text:"Hoi",points:22,aliases:[]},{text:"Ki",points:18,aliases:[]},{text:"Bhai",points:16,aliases:[]},{text:"Mama",points:10,aliases:[]},{text:"Dei",points:8,aliases:[]}] }
 ];
 
 /* -------------------------------------------------------------------------
@@ -660,29 +527,97 @@ function chooseControl(team) {
   renderScores();
 }
 
-/* ---------- Answer matching (Revision 1: typed-guess reveal) ----------
-   Players type the answer they called out. We compare it against the
-   hidden survey answers case-insensitively and ignoring extra/duplicate
-   whitespace. A match flips ONLY that specific card (any position) and
-   awards its points; a non-match logs a strike. The old "reveal answers
-   top-to-bottom" behavior has been removed entirely. */
+/* ---------- Answer matching engine (semantic, alias-aware) ----------
+   Players type the answer they called out. Instead of requiring an exact
+   string match, we run the guess through a small pipeline of reusable
+   helpers so synonyms, plurals, abbreviations, and small typos are all
+   accepted — while the board only ever reveals the ORIGINAL survey text
+   (never whatever the player actually typed). A match flips ONLY that
+   specific card (any position) and awards its points; a non-match logs a
+   strike. Sequential top-to-bottom reveal does not exist anywhere here. */
+
+// 1) Normalize: lowercase, trim, strip minor punctuation, collapse spaces.
 function normalizeAnswer(str) {
-  return str
+  return String(str)
     .toLowerCase()
     .trim()
-    .replace(/\s+/g, " ")           // collapse repeated/extra spaces
-    .replace(/[.,!?'"()-]/g, "");   // ignore minor punctuation differences
+    .replace(/[.,!?'"()-]/g, "")     // ignore minor punctuation differences
+    .replace(/\s+/g, " ");           // collapse repeated/extra spaces
 }
 
-// Returns the index of the first NOT-YET-REVEALED answer whose normalized
-// text matches the normalized guess, or -1 if nothing matches.
+// 2) Very small singular/plural normalizer — enough to treat "momo"/"momos",
+//    "class"/"classes", "story"/"stories" etc. as equivalent without pulling
+//    in a full NLP library.
+function singularize(word) {
+  if (word.length <= 3) return word;
+  if (word.endsWith("ies") && word.length > 4) return word.slice(0, -3) + "y";
+  if (/(ses|xes|ches|shes)$/.test(word)) return word.slice(0, -2);
+  if (word.endsWith("ss")) return word;               // "class", "glass" stay as-is
+  if (word.endsWith("s")) return word.slice(0, -1);   // "cats" -> "cat"
+  return word;
+}
+
+// 3) Levenshtein edit distance — classic DP table, used only as a last
+//    resort so short/unrelated words can't accidentally match each other.
+function levenshtein(a, b) {
+  const m = a.length, n = b.length;
+  if (m === 0) return n;
+  if (n === 0) return m;
+  const prev = new Array(n + 1);
+  const curr = new Array(n + 1);
+  for (let j = 0; j <= n; j++) prev[j] = j;
+  for (let i = 1; i <= m; i++) {
+    curr[0] = i;
+    for (let j = 1; j <= n; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      curr[j] = Math.min(
+        prev[j] + 1,        // deletion
+        curr[j - 1] + 1,    // insertion
+        prev[j - 1] + cost  // substitution
+      );
+    }
+    for (let j = 0; j <= n; j++) prev[j] = curr[j];
+  }
+  return prev[n];
+}
+
+// 4) Fuzzy equality — allows small spelling mistakes ("cigrette", "colege")
+//    while staying strict enough that unrelated short words don't collide.
+function fuzzyEqual(a, b) {
+  if (a === b) return true;
+  const maxLen = Math.max(a.length, b.length);
+  if (maxLen <= 3) return false;               // too short to risk fuzzy matching
+  const threshold = maxLen <= 6 ? 1 : 2;
+  return levenshtein(a, b) <= threshold;
+}
+
+// 5) wordsMatch — the core "are these two normalized words the same idea"
+//    check: exact -> singular/plural -> fuzzy spelling.
+function wordsMatch(normA, normB) {
+  if (normA === normB) return true;
+  if (singularize(normA) === singularize(normB)) return true;
+  if (fuzzyEqual(normA, normB)) return true;
+  return false;
+}
+
+// 6) isAnswerMatch — checks a raw guess against one answer object
+//    ({ text, points, aliases }). Aliases let a single survey answer accept
+//    synonyms ("mobile"/"smartphone" for "Phone", "chai" for "Tea", etc.)
+//    without ever changing what gets displayed on the board.
+function isAnswerMatch(guessText, answerObj) {
+  const guessNorm = normalizeAnswer(guessText);
+  if (!guessNorm) return false;
+  const candidates = [answerObj.text, ...(answerObj.aliases || [])].map(normalizeAnswer);
+  return candidates.some(candidate => wordsMatch(guessNorm, candidate));
+}
+
+// Returns the index of the first NOT-YET-REVEALED answer that the guess
+// matches (by text or alias), or -1 if nothing matches.
 function findMatchingAnswerIndex(guessText) {
   const q = currentQuestion();
-  const normalizedGuess = normalizeAnswer(guessText);
-  if (!normalizedGuess) return -1;
   for (let i = 0; i < q.answers.length; i++) {
     if (game.revealedIndices.has(i)) continue; // already scored — can't score twice
-    if (normalizeAnswer(q.answers[i].text) === normalizedGuess) return i;
+    if (isAnswerMatch(guessText, q.answers[i])) return i;
   }
   return -1;
 }
