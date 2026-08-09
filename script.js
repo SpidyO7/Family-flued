@@ -18,6 +18,7 @@
    is { text, points, aliases } — aliases feed the matching engine below but
    are NEVER shown on the board; only .text is ever revealed.
    ------------------------------------------------------------------------- */
+const PRELOADED_QUESTIONS = questions;
 const questions = [
   {
     id: 1,
