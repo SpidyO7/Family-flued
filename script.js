@@ -19,112 +19,682 @@
    are NEVER shown on the board; only .text is ever revealed.
    ------------------------------------------------------------------------- */
 const PRELOADED_QUESTIONS = [
-  { question: "Name something every fresher is scared of.",
-    answers: [{text:"Seniors",points:30,aliases:["senior"]},{text:"Ragging",points:24,aliases:[]},{text:"English",points:18,aliases:[]},{text:"Friends",points:12,aliases:[]},{text:"Attendance",points:10,aliases:[]},{text:"Classes",points:6,aliases:[]}] },
-  { question: "Name the first thing you notice about a classmate.",
-    answers: [{text:"Face",points:30,aliases:[]},{text:"Dress",points:24,aliases:[]},{text:"Smile",points:18,aliases:[]},{text:"Hair",points:12,aliases:[]},{text:"Height",points:10,aliases:[]},{text:"Shoes",points:6,aliases:["sneakers", "sneaker"]}] },
-  { question: "Name something students ask on the first day.",
-    answers: [{text:"Name",points:30,aliases:[]},{text:"Department",points:24,aliases:[]},{text:"Hostel",points:18,aliases:[]},{text:"Hometown",points:12,aliases:[]},{text:"Instagram",points:10,aliases:["insta", "ig"]},{text:"Semester",points:6,aliases:[]}] },
-  { question: "Name something students secretly judge.",
-    answers: [{text:"Outfit",points:30,aliases:["clothes", "dress", "dresses"]},{text:"Shoes",points:22,aliases:["sneakers", "sneaker"]},{text:"Accent",points:18,aliases:[]},{text:"Phone",points:12,aliases:["mobile", "smartphone", "cell", "cellphone"]},{text:"Hair",points:10,aliases:[]},{text:"Bag",points:8,aliases:[]}] },
-  { question: "Name something students always lose.",
-    answers: [{text:"Pen",points:30,aliases:[]},{text:"Charger",points:22,aliases:["chargers", "cable", "wire"]},{text:"ID",points:18,aliases:["id card", "identity card"]},{text:"Bottle",points:12,aliases:["water bottle"]},{text:"Wallet",points:10,aliases:["purse"]},{text:"Notes",points:8,aliases:["note", "notebook"]}] },
-  { question: "Name something students do before sleeping.",
-    answers: [{text:"Reels",points:30,aliases:["instagram reels", "insta reels"]},{text:"Chat",points:22,aliases:[]},{text:"Music",points:18,aliases:["song", "songs"]},{text:"YouTube",points:14,aliases:["you tube", "yt"]},{text:"Snapchat",points:10,aliases:["snap"]},{text:"Gaming",points:6,aliases:["games", "game", "gambling online"]}] },
-  { question: "Name something students always refresh.",
-    answers: [{text:"Instagram",points:30,aliases:["insta", "ig"]},{text:"Snapchat",points:24,aliases:["snap"]},{text:"WhatsApp",points:18,aliases:["whats app", "wp"]},{text:"News",points:12,aliases:[]},{text:"Scores",points:10,aliases:[]},{text:"Mail",points:6,aliases:[]}] },
-  { question: "Name a Gen Z word everyone says.",
-    answers: [{text:"Bro",points:28,aliases:[]},{text:"Aura",points:22,aliases:["auraa"]},{text:"Cringe",points:18,aliases:[]},{text:"Slay",points:12,aliases:[]},{text:"Sus",points:10,aliases:["suspicious"]},{text:"Delulu",points:10,aliases:["delusional"]}] },
-  { question: "Name something students gossip about.",
-    answers: [{text:"Crush",points:30,aliases:[]},{text:"Couples",points:24,aliases:[]},{text:"Teachers",points:16,aliases:[]},{text:"Friends",points:12,aliases:[]},{text:"Results",points:10,aliases:[]},{text:"Seniors",points:8,aliases:["senior"]}] },
-  { question: "Name something students spend too much money on.",
-    answers: [{text:"Food",points:30,aliases:[]},{text:"Coffee",points:22,aliases:["cafe coffee", "cold coffee"]},{text:"Shopping",points:18,aliases:[]},{text:"Recharge",points:12,aliases:["mobile recharge", "topup", "top up"]},{text:"Petrol",points:10,aliases:[]},{text:"Trips",points:8,aliases:[]}] },
-  { question: "Name something every hostel room smells of.",
-    answers: [{text:"Perfume",points:28,aliases:["deo", "deodorant"]},{text:"Maggi",points:24,aliases:[]},{text:"Shoes",points:18,aliases:["sneakers", "sneaker"]},{text:"Food",points:12,aliases:[]},{text:"Spray",points:10,aliases:["deo spray", "body spray"]},{text:"Laundry",points:8,aliases:[]}] },
-  { question: "Name something students pretend to understand.",
-    answers: [{text:"Lecture",points:30,aliases:[]},{text:"Assignment",points:22,aliases:[]},{text:"Math",points:18,aliases:[]},{text:"Coding",points:12,aliases:["code", "programming"]},{text:"English",points:10,aliases:[]},{text:"Rules",points:8,aliases:[]}] },
-  { question: "Name something students throw a party for.",
-    answers: [{text:"Birthday",points:30,aliases:[]},{text:"Results",points:22,aliases:[]},{text:"Fest",points:18,aliases:[]},{text:"Victory",points:14,aliases:[]},{text:"Weekend",points:10,aliases:[]},{text:"Farewell",points:6,aliases:[]}] },
-  { question: "Name a sport students never miss.",
-    answers: [{text:"Cricket",points:34,aliases:["cricket match"]},{text:"Football",points:24,aliases:["soccer"]},{text:"Badminton",points:16,aliases:[]},{text:"Kabaddi",points:10,aliases:[]},{text:"F1",points:8,aliases:[]},{text:"Volleyball",points:8,aliases:[]}] },
-  { question: "Name something students check during the World Cup.",
-    answers: [{text:"Score",points:30,aliases:[]},{text:"Highlights",points:24,aliases:[]},{text:"Memes",points:18,aliases:[]},{text:"Reels",points:12,aliases:["instagram reels", "insta reels"]},{text:"Fantasy",points:10,aliases:[]},{text:"Stats",points:6,aliases:[]}] },
-  { question: "Name something students flex.",
-    answers: [{text:"Phone",points:28,aliases:["mobile", "smartphone", "cell", "cellphone"]},{text:"Outfit",points:22,aliases:["clothes", "dress", "dresses"]},{text:"Shoes",points:18,aliases:["sneakers", "sneaker"]},{text:"Snapscore",points:14,aliases:["snap score", "snap streak"]},{text:"Followers",points:10,aliases:[]},{text:"Bike",points:8,aliases:[]}] },
-  { question: "You hear 'Pradhan Ji'. What comes to mind?",
-    answers: [{text:"Panchayat",points:32,aliases:[]},{text:"Sachiv",points:24,aliases:[]},{text:"Lauki",points:16,aliases:[]},{text:"Vidhayak",points:12,aliases:[]},{text:"Phulera",points:10,aliases:[]},{text:"Rinki",points:6,aliases:[]}] },
-  { question: "You hear 'Pushpa'. What comes to mind?",
-    answers: [{text:"Jhukega",points:30,aliases:[]},{text:"Fire",points:24,aliases:[]},{text:"Srivalli",points:18,aliases:[]},{text:"Shekhawat",points:12,aliases:[]},{text:"Red Sandal",points:10,aliases:[]},{text:"Allu",points:6,aliases:[]}] },
-  { question: "You hear 'Spider-Man'. What comes to mind?",
-    answers: [{text:"Web",points:30,aliases:[]},{text:"MJ",points:22,aliases:[]},{text:"Marvel",points:18,aliases:[]},{text:"Tom",points:12,aliases:[]},{text:"Mask",points:10,aliases:[]},{text:"Swing",points:8,aliases:[]}] },
-  { question: "You hear 'Messi'. What comes to mind?",
-    answers: [{text:"GOAT",points:30,aliases:[]},{text:"Argentina",points:24,aliases:[]},{text:"Football",points:18,aliases:["soccer"]},{text:"World Cup",points:12,aliases:[]},{text:"Barcelona",points:10,aliases:[]},{text:"Inter Miami",points:6,aliases:[]}] },
-  { question: "You hear 'Kohli'. What comes to mind?",
-    answers: [{text:"Cricket",points:30,aliases:["cricket match"]},{text:"RCB",points:24,aliases:[]},{text:"Century",points:18,aliases:[]},{text:"Aggression",points:12,aliases:[]},{text:"Anushka",points:10,aliases:[]},{text:"King",points:6,aliases:[]}] },
-  { question: "You hear 'Ronaldo'. What comes to mind?",
-    answers: [{text:"Siuuu",points:32,aliases:[]},{text:"GOAT",points:22,aliases:[]},{text:"Football",points:18,aliases:["soccer"]},{text:"Portugal",points:12,aliases:[]},{text:"Real Madrid",points:10,aliases:[]},{text:"Al Nassr",points:6,aliases:[]}] },
-  { question: "You hear 'Deadpool'. What comes to mind?",
-    answers: [{text:"Marvel",points:30,aliases:[]},{text:"Wolverine",points:24,aliases:[]},{text:"Ryan",points:18,aliases:[]},{text:"Red",points:12,aliases:[]},{text:"Comedy",points:10,aliases:[]},{text:"Mask",points:6,aliases:[]}] },
-  { question: "You hear 'Wednesday'. What comes to mind?",
-    answers: [{text:"Dance",points:30,aliases:[]},{text:"Netflix",points:24,aliases:["net flix"]},{text:"Black",points:18,aliases:[]},{text:"Addams",points:12,aliases:[]},{text:"Thing",points:10,aliases:[]},{text:"School",points:6,aliases:[]}] },
-  { question: "Name something that gives you instant aura.",
-    answers: [{text:"Confidence",points:30,aliases:[]},{text:"Outfit",points:24,aliases:["clothes", "dress", "dresses"]},{text:"Perfume",points:18,aliases:["deo", "deodorant"]},{text:"Hair",points:12,aliases:[]},{text:"Shoes",points:10,aliases:["sneakers", "sneaker"]},{text:"Smile",points:6,aliases:[]}] },
-  { question: "Name a green flag in a classmate.",
-    answers: [{text:"Kind",points:30,aliases:[]},{text:"Funny",points:22,aliases:[]},{text:"Helpful",points:18,aliases:[]},{text:"Respect",points:14,aliases:[]},{text:"Honest",points:10,aliases:[]},{text:"Smile",points:6,aliases:[]}] },
-  { question: "Name a red flag in a classmate.",
-    answers: [{text:"Attitude",points:30,aliases:["attitude problem"]},{text:"Arrogant",points:24,aliases:["arrogance"]},{text:"Rude",points:18,aliases:[]},{text:"Liar",points:12,aliases:[]},{text:"Fake",points:10,aliases:[]},{text:"Ego",points:6,aliases:[]}] },
-  { question: "Name something students stalk.",
-    answers: [{text:"Crush",points:30,aliases:[]},{text:"Instagram",points:24,aliases:["insta", "ig"]},{text:"Ex",points:18,aliases:[]},{text:"Story",points:12,aliases:[]},{text:"Friends",points:10,aliases:[]},{text:"Profile",points:6,aliases:[]}] },
-  { question: "Name something that instantly kills the vibe.",
-    answers: [{text:"Rain",points:28,aliases:[]},{text:"Network",points:22,aliases:["signal", "no network"]},{text:"Attendance",points:18,aliases:[]},{text:"Battery",points:14,aliases:["low battery", "charge"]},{text:"Homework",points:10,aliases:[]},{text:"Parents",points:8,aliases:[]}] },
-  { question: "Name something everyone lies about.",
-    answers: [{text:"Sleep",points:30,aliases:[]},{text:"Study",points:24,aliases:[]},{text:"Marks",points:18,aliases:[]},{text:"Budget",points:12,aliases:[]},{text:"Gym",points:10,aliases:[]},{text:"Diet",points:6,aliases:[]}] },
-  { question: "Name something students promise to stop but never do.",
-    answers: [{text:"Reels",points:30,aliases:["instagram reels", "insta reels"]},{text:"Gaming",points:24,aliases:["games", "game", "gambling online"]},{text:"YouTube",points:18,aliases:["you tube", "yt"]},{text:"Junk food",points:12,aliases:[]},{text:"Netflix",points:10,aliases:["net flix"]},{text:"Memes",points:6,aliases:[]}] },
-  { question: "Name something students secretly compete in.",
-    answers: [{text:"Marks",points:28,aliases:[]},{text:"Followers",points:22,aliases:[]},{text:"Snapscore",points:18,aliases:["snap score", "snap streak"]},{text:"Looks",points:14,aliases:[]},{text:"Sports",points:10,aliases:[]},{text:"Gaming",points:8,aliases:["games", "game", "gambling online"]}] },
-  { question: "Name something students do before posting a photo.",
-    answers: [{text:"Filter",points:30,aliases:[]},{text:"Edit",points:22,aliases:[]},{text:"Caption",points:18,aliases:[]},{text:"Crop",points:12,aliases:[]},{text:"Retake",points:10,aliases:[]},{text:"Music",points:8,aliases:["song", "songs"]}] },
-  { question: "Name a singer students play on repeat during heartbreak.",
-    answers: [{text:"Arijit",points:32,aliases:["arijit singh"]},{text:"Atif",points:22,aliases:["atif aslam"]},{text:"KK",points:18,aliases:["k k"]},{text:"Shreya",points:12,aliases:["shreya ghoshal"]},{text:"Jubin",points:10,aliases:["jubin garg", "zubeen garg"]},{text:"Anuv",points:6,aliases:[]}] },
-  { question: "Name a singer played at every college DJ night.",
-    answers: [{text:"Arijit",points:30,aliases:["arijit singh"]},{text:"Honey",points:24,aliases:[]},{text:"Diljit",points:18,aliases:["diljit dosanjh"]},{text:"Shreya",points:12,aliases:["shreya ghoshal"]},{text:"KK",points:10,aliases:["k k"]},{text:"Atif",points:6,aliases:["atif aslam"]}] },
-  { question: "Name a game students play when they're bored.",
-    answers: [{text:"BGMI",points:30,aliases:["pubg"]},{text:"Ludo",points:22,aliases:[]},{text:"Valorant",points:18,aliases:[]},{text:"UNO",points:12,aliases:[]},{text:"Chess",points:10,aliases:[]},{text:"Minecraft",points:8,aliases:[]}] },
-  { question: "Name a sport played every evening on the college ground.",
-    answers: [{text:"Cricket",points:34,aliases:["cricket match"]},{text:"Football",points:24,aliases:["soccer"]},{text:"Badminton",points:16,aliases:[]},{text:"Kabaddi",points:10,aliases:[]},{text:"Volleyball",points:8,aliases:[]},{text:"Basketball",points:8,aliases:[]}] },
-  { question: "Name something students buy after getting their monthly allowance.",
-    answers: [{text:"Food",points:30,aliases:[]},{text:"Clothes",points:22,aliases:[]},{text:"Shoes",points:18,aliases:["sneakers", "sneaker"]},{text:"Coffee",points:12,aliases:["cafe coffee", "cold coffee"]},{text:"Perfume",points:10,aliases:["deo", "deodorant"]},{text:"Recharge",points:8,aliases:["mobile recharge", "topup", "top up"]}] },
-  { question: "Name an app students open when they're avoiding studies.",
-    answers: [{text:"Instagram",points:30,aliases:["insta", "ig"]},{text:"YouTube",points:24,aliases:["you tube", "yt"]},{text:"Snapchat",points:18,aliases:["snap"]},{text:"Spotify",points:12,aliases:[]},{text:"WhatsApp",points:10,aliases:["whats app", "wp"]},{text:"Netflix",points:6,aliases:["net flix"]}] },
-  { question: "Name something students wear when they want to impress.",
-    answers: [{text:"Sneakers",points:30,aliases:[]},{text:"Perfume",points:22,aliases:["deo", "deodorant"]},{text:"Watch",points:18,aliases:[]},{text:"Jacket",points:12,aliases:[]},{text:"Chain",points:10,aliases:[]},{text:"Cap",points:8,aliases:[]}] },
-  { question: "Name a snack every college canteen sells.",
-    answers: [{text:"Momo",points:30,aliases:["momos"]},{text:"Maggi",points:26,aliases:[]},{text:"Samosa",points:18,aliases:[]},{text:"Tea",points:14,aliases:["chai"]},{text:"Chowmein",points:8,aliases:[]},{text:"Roll",points:4,aliases:[]}] },
-  { question: "Name something you'll hear blasting during Bihu.",
-    answers: [{text:"Dhol",points:30,aliases:[]},{text:"Pepa",points:24,aliases:[]},{text:"Gogona",points:18,aliases:[]},{text:"Xutuli",points:12,aliases:[]},{text:"Toka",points:10,aliases:[]},{text:"DJ",points:6,aliases:[]}] },
-  { question: "Name a Bihu outfit every student owns.",
-    answers: [{text:"Gamosa",points:30,aliases:["gamocha"]},{text:"Mekhela",points:22,aliases:["mekhela sador", "mekhela chador"]},{text:"Jaapi",points:18,aliases:["japi"]},{text:"Dhoti",points:14,aliases:[]},{text:"Kurta",points:10,aliases:[]},{text:"Sador",points:6,aliases:[]}] },
-  { question: "Name a hill station students plan a trip to.",
-    answers: [{text:"Shillong",points:30,aliases:[]},{text:"Tawang",points:22,aliases:[]},{text:"Kohima",points:18,aliases:[]},{text:"Ziro",points:14,aliases:[]},{text:"Kalimpong",points:10,aliases:[]},{text:"Cherrapunji",points:6,aliases:[]}] },
-  { question: "Name something every tea stall near college sells.",
-    answers: [{text:"Tea",points:30,aliases:["chai"]},{text:"Biscuit",points:22,aliases:[]},{text:"Samosa",points:18,aliases:[]},{text:"Bun",points:14,aliases:[]},{text:"Cigarette",points:10,aliases:["smoke", "smoking", "cigarettes", "ciggy"]},{text:"Maggi",points:6,aliases:[]}] },
-  { question: "Name something you can't survive Assam's monsoon without.",
-    answers: [{text:"Umbrella",points:30,aliases:[]},{text:"Raincoat",points:22,aliases:[]},{text:"Boots",points:18,aliases:[]},{text:"Jacket",points:14,aliases:[]},{text:"Bunk",points:8,aliases:[]},{text:"Tea",points:8,aliases:["chai"]}] },
-  { question: "Name something students eat during a college Bihu function.",
-    answers: [{text:"Pitha",points:30,aliases:["pithas"]},{text:"Laru",points:24,aliases:[]},{text:"Jolpan",points:18,aliases:[]},{text:"Chira",points:14,aliases:[]},{text:"Curd",points:8,aliases:[]},{text:"Payash",points:6,aliases:[]}] },
-  { question: "Name a popular local transport students use to reach college.",
-    answers: [{text:"Auto",points:30,aliases:["auto rickshaw", "rickshaw"]},{text:"Bus",points:24,aliases:["city bus"]},{text:"Bike",points:18,aliases:[]},{text:"Cycle",points:12,aliases:[]},{text:"Sumo",points:10,aliases:["tata sumo"]},{text:"Walk",points:6,aliases:[]}] },
-  { question: "Name something you'd spot on a trip to Kaziranga.",
-    answers: [{text:"Rhino",points:34,aliases:["rhinoceros"]},{text:"Elephant",points:24,aliases:[]},{text:"Jeep",points:18,aliases:[]},{text:"Grass",points:12,aliases:[]},{text:"Bird",points:8,aliases:[]},{text:"Guide",points:4,aliases:[]}] },
-  { question: "Name a festival students look forward to on campus.",
-    answers: [{text:"Bihu",points:30,aliases:[]},{text:"Durga Puja",points:24,aliases:[]},{text:"Diwali",points:18,aliases:[]},{text:"Saraswati Puja",points:14,aliases:[]},{text:"Freshers",points:10,aliases:[]},{text:"Fest",points:4,aliases:[]}] },
-  { question: "Name something every Assamese kitchen has.",
-    answers: [{text:"Rice",points:28,aliases:[]},{text:"Fish",points:22,aliases:[]},{text:"Khar",points:18,aliases:[]},{text:"Oil",points:14,aliases:[]},{text:"Tenga",points:10,aliases:[]},{text:"Bamboo",points:8,aliases:[]}] },
-  { question: "Name a word Assamese students use a lot with friends.",
-    answers: [{text:"Da",points:26,aliases:[]},{text:"Hoi",points:22,aliases:[]},{text:"Ki",points:18,aliases:[]},{text:"Bhai",points:16,aliases:[]},{text:"Mama",points:10,aliases:[]},{text:"Dei",points:8,aliases:[]}] }
+  {
+    id: 1,
+    question: "What is the first thing students do after waking up?",
+    answers: [
+      ["Check phone", 35],
+      ["Check notifications", 25],
+      ["Instagram/Reels", 18],
+      ["WhatsApp", 12],
+      ["Go back to sleep", 10]
+    ]
+  },
+
+  {
+    id: 2,
+    question: "What is the first thing students check before going to class?",
+    answers: [
+      ["Class timing", 30],
+      ["WhatsApp class group", 25],
+      ["Attendance", 20],
+      ["Classroom/location", 15],
+      ["Is the class cancelled?", 10]
+    ]
+  },
+
+  {
+    id: 3,
+    question: "What does someone check when they say, \"I'm just checking the time\"?",
+    answers: [
+      ["Instagram", 30],
+      ["WhatsApp", 25],
+      ["Notifications", 20],
+      ["Messages", 15],
+      ["Actually the time", 10]
+    ]
+  },
+
+  {
+    id: 4,
+    question: "What do students open first when they unlock their phone?",
+    answers: [
+      ["Instagram", 35],
+      ["WhatsApp", 25],
+      ["Snapchat", 20],
+      ["YouTube", 12],
+      ["Gallery", 8]
+    ]
+  },
+
+  {
+    id: 5,
+    question: "What does someone actually mean by \"I'm just checking Instagram\"?",
+    answers: [
+      ["Scrolling Reels", 40],
+      ["Checking someone's profile", 25],
+      ["Replying to DMs", 15],
+      ["Checking stories", 12],
+      ["Actually checking something", 8]
+    ]
+  },
+
+  {
+    id: 6,
+    question: "What makes someone open Snapchat immediately?",
+    answers: [
+      ["Streaks", 40],
+      ["New snap", 25],
+      ["Someone they like sent one 👀", 20],
+      ["Memories", 10],
+      ["Accidentally opened it", 5]
+    ]
+  },
+
+  {
+    id: 7,
+    question: "What is the biggest Snapchat crime?",
+    answers: [
+      ["Breaking a streak", 35],
+      ["Leaving someone on delivered", 25],
+      ["Screenshotting a private snap", 20],
+      ["Sending a boring snap", 12],
+      ["Replying after 2 days", 8]
+    ]
+  },
+
+  {
+    id: 8,
+    question: "What happens when someone says \"one last reel\"?",
+    answers: [
+      ["Watches 20 more", 35],
+      ["Loses track of time", 25],
+      ["Sends it to a friend", 20],
+      ["Likes it", 12],
+      ["Actually stops", 8]
+    ]
+  },
+
+  {
+    id: 9,
+    question: "What type of Reel gets sent to the group chat?",
+    answers: [
+      ["Relatable", 30],
+      ["Savage/funny", 25],
+      ["College-related", 20],
+      ["Crush/relationship", 15],
+      ["Completely random", 10]
+    ]
+  },
+
+  {
+    id: 10,
+    question: "What makes someone instantly send a Reel to their best friend?",
+    answers: [
+      ["This is literally you", 35],
+      ["Inside joke", 25],
+      ["Crush/relationship reference", 20],
+      ["Dark humour", 12],
+      ["Food/travel", 8]
+    ]
+  },
+
+  {
+    id: 11,
+    question: "Where does college gossip spread fastest?",
+    answers: [
+      ["Friend group", 30],
+      ["WhatsApp group", 25],
+      ["Canteen", 20],
+      ["Snapchat/Instagram", 15],
+      ["Someone told someone", 10]
+    ]
+  },
+
+  {
+    id: 12,
+    question: "What does someone say before telling you gossip?",
+    answers: [
+      ["Don't tell anyone…", 40],
+      ["I shouldn't be telling you this…", 25],
+      ["Promise you won't tell?", 15],
+      ["Bro, listen…", 12],
+      ["This is crazy", 8]
+    ]
+  },
+
+  {
+    id: 13,
+    question: "What makes college gossip interesting?",
+    answers: [
+      ["Crush involved", 30],
+      ["Teacher involved", 25],
+      ["Friend group involved", 20],
+      ["Relationship drama", 15],
+      ["Nobody knows the full story", 10]
+    ]
+  },
+
+  {
+    id: 14,
+    question: "What does \"Bro is cooked\" mean?",
+    answers: [
+      ["He's in serious trouble", 35],
+      ["Failed badly", 25],
+      ["Mentally exhausted", 20],
+      ["Situation is hopeless", 12],
+      ["Actually cooking", 8]
+    ]
+  },
+
+  {
+    id: 15,
+    question: "What does \"It's giving…\" usually mean?",
+    answers: [
+      ["Describing a vibe", 40],
+      ["Complimenting someone", 20],
+      ["Judging something", 15],
+      ["Making a joke", 15],
+      ["Nobody knows anymore", 10]
+    ]
+  },
+
+  {
+    id: 16,
+    question: "What does \"NPC\" describe?",
+    answers: [
+      ["Someone acting predictable", 35],
+      ["Someone with no reaction", 25],
+      ["Someone behaving randomly", 20],
+      ["Someone always following others", 12],
+      ["A gaming character", 8]
+    ]
+  },
+
+  {
+    id: 17,
+    question: "What does \"W\" mean in the group chat?",
+    answers: [
+      ["Win", 45],
+      ["Good decision", 25],
+      ["Respect", 15],
+      ["Congratulations", 10],
+      ["Nobody knows anymore", 5]
+    ]
+  },
+
+  {
+    id: 18,
+    question: "What does \"Delulu\" usually describe?",
+    answers: [
+      ["Being unrealistically hopeful", 40],
+      ["Having a crush", 20],
+      ["Overthinking", 15],
+      ["Being confident", 15],
+      ["Being completely confused", 10]
+    ]
+  },
+
+  {
+    id: 19,
+    question: "What is the most common excuse for missing class?",
+    answers: [
+      ["I wasn't feeling well.", 30],
+      ["I overslept.", 25],
+      ["I had some work.", 20],
+      ["I didn't know there was class.", 15],
+      ["I thought it was cancelled.", 10]
+    ]
+  },
+
+  {
+    id: 20,
+    question: "What happens when students hear \"assignment submission is today\"?",
+    answers: [
+      ["Start immediately", 5],
+      ["Ask friends for the file", 30],
+      ["Google/YouTube it", 20],
+      ["Ask AI", 25],
+      ["Bro, what assignment?", 20]
+    ]
+  },
+
+  {
+    id: 21,
+    question: "What happens when the teacher says \"I won't take attendance today\"?",
+    answers: [
+      ["Everyone relaxes", 30],
+      ["Some students leave", 25],
+      ["Start talking", 20],
+      ["Open phones", 15],
+      ["Suddenly interested in the lecture", 10]
+    ]
+  },
+
+  {
+    id: 22,
+    question: "What happens 5 minutes before a presentation?",
+    answers: [
+      ["Everyone suddenly practices", 30],
+      ["Fight over who speaks first", 20],
+      ["Check the PPT", 20],
+      ["Bro, what's my part?", 20],
+      ["Someone disappears", 10]
+    ]
+  },
+
+  {
+    id: 23,
+    question: "What happens when someone says, \"Let's go to the canteen for 5 minutes\"?",
+    answers: [
+      ["5 minutes becomes 30", 35],
+      ["Everyone joins", 25],
+      ["Gossip starts", 20],
+      ["Buy something unnecessarily", 12],
+      ["Actually return in 5 minutes", 8]
+    ]
+  },
+
+  {
+    id: 24,
+    question: "What happens during a free period?",
+    answers: [
+      ["Canteen", 30],
+      ["Reels", 25],
+      ["Gossip", 20],
+      ["Sleep", 15],
+      ["Last-minute assignment", 10]
+    ]
+  },
+
+  {
+    id: 25,
+    question: "What is most likely to start an argument in a friend group?",
+    answers: [
+      ["Where to eat", 30],
+      ["Who pays", 20],
+      ["Where to go", 20],
+      ["Someone cancelling plans", 15],
+      ["Bro, you didn't invite me?", 15]
+    ]
+  },
+
+  {
+    id: 26,
+    question: "What do people do when they see their crush?",
+    answers: [
+      ["Fix their hair", 30],
+      ["Pretend not to notice", 25],
+      ["Check their phone", 20],
+      ["Act extra confident", 15],
+      ["Forget how to walk", 10]
+    ]
+  },
+
+  {
+    id: 27,
+    question: "What is the first thing someone does after getting a DM from their crush?",
+    answers: [
+      ["Shows their best friend", 35],
+      ["Takes a screenshot", 25],
+      ["Thinks about the reply", 20],
+      ["Replies instantly", 12],
+      ["Pretends they don't care", 8]
+    ]
+  },
+
+  {
+    id: 28,
+    question: "What is the biggest sign someone likes someone?",
+    answers: [
+      ["Finds reasons to talk", 30],
+      ["Replies quickly", 25],
+      ["Remembers small things", 20],
+      ["Looks at them repeatedly", 15],
+      ["Friends start teasing them", 10]
+    ]
+  },
+
+  {
+    id: 29,
+    question: "What do people do when they see an attractive person walking toward them?",
+    answers: [
+      ["Fix their hair", 30],
+      ["Check themselves in phone camera", 25],
+      ["Walk differently", 20],
+      ["Pretend not to care", 15],
+      ["Forget how to function", 10]
+    ]
+  },
+
+  {
+    id: 30,
+    question: "What is the biggest red flag in a person?",
+    answers: [
+      ["Lies", 30],
+      ["Never apologizes", 25],
+      ["Talks badly about everyone", 20],
+      ["I'm always right", 15],
+      ["Says I'm not toxic", 10]
+    ]
+  },
+
+  {
+    id: 31,
+    question: "What is the biggest sign someone is toxic?",
+    answers: [
+      ["Blames everyone else", 30],
+      ["Never admits they're wrong", 25],
+      ["Constant drama", 20],
+      ["Controlling behaviour", 15],
+      ["Says I'm the least toxic person", 10]
+    ]
+  },
+
+  {
+    id: 32,
+    question: "What do people do when they say, \"I'm going to sleep early tonight\"?",
+    answers: [
+      ["Scroll Reels", 35],
+      ["Watch Netflix/YouTube", 25],
+      ["Overthink", 20],
+      ["Text someone", 12],
+      ["Actually sleep", 8]
+    ]
+  },
+
+  {
+    id: 33,
+    question: "What is something students say every day but rarely mean?",
+    answers: [
+      ["I'll study tonight.", 35],
+      ["I'm coming in 5 minutes.", 25],
+      ["One last reel.", 20],
+      ["I'll sleep early.", 12],
+      ["I'm not hungry.", 8]
+    ]
+  },
+
+  {
+    id: 34,
+    question: "What is the most common reason someone doesn't reply to a message?",
+    answers: [
+      ["I was busy.", 35],
+      ["Forgot", 25],
+      ["Saw it and ignored it", 20],
+      ["Fell asleep", 12],
+      ["My phone was on silent.", 8]
+    ]
+  },
+
+  {
+    id: 35,
+    question: "What is the biggest group-chat betrayal?",
+    answers: [
+      ["Sending a private screenshot", 35],
+      ["Breaking someone's secret", 25],
+      ["Leaving someone on seen", 20],
+      ["Removing someone from the group", 12],
+      ["Reacting with 👍", 8]
+    ]
+  },
+
+  {
+    id: 36,
+    question: "What should never accidentally be sent to the wrong group chat?",
+    answers: [
+      ["Screenshot", 35],
+      ["Gossip", 30],
+      ["Crush message", 20],
+      ["Private photo", 10],
+      ["Look what they said 😂", 5]
+    ]
+  },
+
+  {
+    id: 37,
+    question: "What is most likely to be discussed in the class WhatsApp group?",
+    answers: [
+      ["Assignment", 30],
+      ["Attendance", 25],
+      ["Class timing", 20],
+      ["Is there class tomorrow?", 15],
+      ["Random meme", 10]
+    ]
+  },
+
+  {
+    id: 38,
+    question: "What happens when someone asks \"Guys, attendance today?\"",
+    answers: [
+      ["Everyone checks their own", 30],
+      ["I'm not going.", 25],
+      ["Calculate percentage", 20],
+      ["Someone sends a screenshot", 15],
+      ["Ask the teacher.", 10]
+    ]
+  },
+
+  {
+    id: 39,
+    question: "What is the first thing a fresher notices about a new class?",
+    answers: [
+      ["Who looks friendly", 25],
+      ["Who is attractive 👀", 20],
+      ["Who seems smart", 20],
+      ["Where everyone sits", 20],
+      ["Who should I talk to?", 15]
+    ]
+  },
+
+  {
+    id: 40,
+    question: "How does a new college friendship usually start?",
+    answers: [
+      ["Which section are you in?", 25],
+      ["Asking for notes", 25],
+      ["Sitting beside someone", 20],
+      ["Group project", 15],
+      ["What's your Instagram/Snap?", 15]
+    ]
+  },
+
+  {
+    id: 41,
+    question: "What does a CSE student do when their code doesn't work?",
+    answers: [
+      ["Read the error", 10],
+      ["Google it", 30],
+      ["YouTube it", 20],
+      ["Ask a friend", 20],
+      ["ChatGPT, please save me.", 20]
+    ]
+  },
+
+  {
+    id: 42,
+    question: "What happens during a group project?",
+    answers: [
+      ["One person does everything", 30],
+      ["Someone disappears", 25],
+      ["Everyone says I'll do it tonight", 20],
+      ["Last-minute panic", 15],
+      ["Somehow it gets submitted", 10]
+    ]
+  },
+
+  {
+    id: 43,
+    question: "What does the person who says \"I'll do it tonight\" usually do?",
+    answers: [
+      ["Does nothing", 35],
+      ["Sends it at the last minute", 25],
+      ["Says Bro, remind me", 20],
+      ["Copies someone else's part", 12],
+      ["Actually finishes it", 8]
+    ]
+  },
+
+  {
+    id: 44,
+    question: "What is the biggest enemy of a student in Guwahati?",
+    answers: [
+      ["Sudden rain", 30],
+      ["Traffic", 25],
+      ["Humidity", 20],
+      ["Getting late to class", 15],
+      ["All of the above", 10]
+    ]
+  },
+
+  {
+    id: 45,
+    question: "What is the first thought after coming back to the room after college?",
+    answers: [
+      ["I'm hungry.", 30],
+      ["I need to sleep.", 25],
+      ["I'll study after 10 minutes.", 20],
+      ["Open Instagram", 15],
+      ["What should I eat?", 10]
+    ]
+  },
+
+  {
+    id: 46,
+    question: "What is most likely to expose someone in a friend group?",
+    answers: [
+      ["Screenshot", 35],
+      ["Old photo", 25],
+      ["Group chat message", 20],
+      ["Story archive", 12],
+      ["Friend accidentally telling everyone", 8]
+    ]
+  },
+
+  {
+    id: 47,
+    question: "Who usually knows the latest college gossip first?",
+    answers: [
+      ["The social person", 25],
+      ["Class group admin", 25],
+      ["Canteen regular", 20],
+      ["Someone from another section", 15],
+      ["That one person who knows EVERYTHING", 15]
+    ]
+  },
+
+  {
+    id: 48,
+    question: "Who is most likely to become famous on campus?",
+    answers: [
+      ["The extrovert", 25],
+      ["The funny one", 25],
+      ["The attractive one", 20],
+      ["The topper", 15],
+      ["The mysterious quiet person", 15]
+    ]
+  },
+
+  {
+    id: 49,
+    question: "What happens after someone gets rejected?",
+    answers: [
+      ["I'm fine.", 30],
+      ["Tells their best friend", 25],
+      ["Archives/deletes the chat", 20],
+      ["Acts like they never cared", 15],
+      ["Suddenly becomes a gym bro", 10]
+    ]
+  },
+
+  {
+    id: 50,
+    question: "What is the biggest lie students tell themselves?",
+    answers: [
+      ["I'll study tomorrow.", 35],
+      ["I'll sleep early tonight.", 25],
+      ["I'll attend every class from now.", 20],
+      ["I'll only watch one reel.", 12],
+      ["This semester I'll be serious.", 8]
+    ]
+  },
+
+  {
+    id: 51,
+    question: "Name something students check before class.",
+    answers: [
+      ["WhatsApp", 30],
+      ["Attendance", 25],
+      ["Timetable", 20],
+      ["Classroom", 15],
+      ["Instagram", 10]
+    ]
+  },
+
+  {
+    id: 52,
+    question: "Name a social media app students use every day.",
+    answers: [
+      ["Instagram", 35],
+      ["WhatsApp", 30],
+      ["Snapchat", 20],
+      ["YouTube", 10],
+      ["Facebook", 5]
+    ]
+  },
+
+  {
+    id: 53,
+    question: "Name something that spreads quickly on campus.",
+    answers: [
+      ["Gossip", 35],
+      ["Rumours", 25],
+      ["Memes", 20],
+      ["News", 12],
+      ["Screenshots", 8]
+    ]
+  },
+
+  {
+    id: 54,
+    question: "Name an excuse students give for being late.",
+    answers: [
+      ["Traffic", 30],
+      ["Overslept", 25],
+      ["Couldn't find transport", 20],
+      ["Rain", 15],
+      ["I was on my way", 10]
+    ]
+  },
+
+  {
+    id: 55,
+    question: "Name something students do instead of studying.",
+    answers: [
+      ["Reels", 35],
+      ["Snapchat", 25],
+      ["YouTube", 20],
+      ["Gaming", 12],
+      ["Gossip", 8]
+    ]
+  }
 ];
 
+
+// Optional helper functions
+
+function getQuestionById(id) {
+  return questions.find(q => q.id === id);
+}
+
+function getRandomQuestion() {
+  return questions[Math.floor(Math.random() * questions.length)];
+}
+
+function getRandomQuestions(count = 10) {
+  const shuffled = [...questions].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, count);
+}
 /* -------------------------------------------------------------------------
    2. LOCALSTORAGE HELPERS FOR CUSTOM QUIZZES
    ------------------------------------------------------------------------- */
