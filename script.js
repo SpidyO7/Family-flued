@@ -18,16 +18,16 @@
    is { text, points, aliases } — aliases feed the matching engine below but
    are NEVER shown on the board; only .text is ever revealed.
    ------------------------------------------------------------------------- */
-const PRELOADED_QUESTIONS = [
+const questions = [
   {
     id: 1,
     question: "What is the first thing students do after waking up?",
     answers: [
-      ["Check phone", 35],
-      ["Check notifications", 25],
-      ["Instagram/Reels", 18],
-      ["WhatsApp", 12],
-      ["Go back to sleep", 10]
+      { text: "Check phone", points: 35 },
+      { text: "Check notifications", points: 25 },
+      { text: "Instagram/Reels", points: 18 },
+      { text: "WhatsApp", points: 12 },
+      { text: "Go back to sleep", points: 10 }
     ]
   },
 
@@ -35,650 +35,483 @@ const PRELOADED_QUESTIONS = [
     id: 2,
     question: "What is the first thing students check before going to class?",
     answers: [
-      ["Class timing", 30],
-      ["WhatsApp class group", 25],
-      ["Attendance", 20],
-      ["Classroom/location", 15],
-      ["Is the class cancelled?", 10]
+      { text: "Class timing", points: 30 },
+      { text: "WhatsApp class group", points: 25 },
+      { text: "Attendance", points: 20 },
+      { text: "Classroom/location", points: 15 },
+      { text: "Is the class cancelled?", points: 10 }
     ]
   },
 
   {
     id: 3,
-    question: "What does someone check when they say, \"I'm just checking the time\"?",
+    question: "What do students open first when they unlock their phone?",
     answers: [
-      ["Instagram", 30],
-      ["WhatsApp", 25],
-      ["Notifications", 20],
-      ["Messages", 15],
-      ["Actually the time", 10]
+      { text: "Instagram", points: 35 },
+      { text: "WhatsApp", points: 25 },
+      { text: "Snapchat", points: 20 },
+      { text: "YouTube", points: 12 },
+      { text: "Gallery", points: 8 }
     ]
   },
 
   {
     id: 4,
-    question: "What do students open first when they unlock their phone?",
+    question: "What does someone actually mean by \"I'm just checking Instagram\"?",
     answers: [
-      ["Instagram", 35],
-      ["WhatsApp", 25],
-      ["Snapchat", 20],
-      ["YouTube", 12],
-      ["Gallery", 8]
+      { text: "Scrolling Reels", points: 40 },
+      { text: "Checking someone's profile", points: 25 },
+      { text: "Replying to DMs", points: 15 },
+      { text: "Checking stories", points: 12 },
+      { text: "Actually checking something", points: 8 }
     ]
   },
 
   {
     id: 5,
-    question: "What does someone actually mean by \"I'm just checking Instagram\"?",
+    question: "What makes someone open Snapchat immediately?",
     answers: [
-      ["Scrolling Reels", 40],
-      ["Checking someone's profile", 25],
-      ["Replying to DMs", 15],
-      ["Checking stories", 12],
-      ["Actually checking something", 8]
+      { text: "Streaks", points: 40 },
+      { text: "New snap", points: 25 },
+      { text: "Someone they like sent one 👀", points: 20 },
+      { text: "Memories", points: 10 },
+      { text: "Accidentally opened it", points: 5 }
     ]
   },
 
   {
     id: 6,
-    question: "What makes someone open Snapchat immediately?",
+    question: "What is the biggest Snapchat crime?",
     answers: [
-      ["Streaks", 40],
-      ["New snap", 25],
-      ["Someone they like sent one 👀", 20],
-      ["Memories", 10],
-      ["Accidentally opened it", 5]
+      { text: "Breaking a streak", points: 35 },
+      { text: "Leaving someone on delivered", points: 25 },
+      { text: "Screenshotting a private snap", points: 20 },
+      { text: "Sending a boring snap", points: 12 },
+      { text: "Replying after 2 days", points: 8 }
     ]
   },
 
   {
     id: 7,
-    question: "What is the biggest Snapchat crime?",
+    question: "What happens when someone says \"one last reel\"?",
     answers: [
-      ["Breaking a streak", 35],
-      ["Leaving someone on delivered", 25],
-      ["Screenshotting a private snap", 20],
-      ["Sending a boring snap", 12],
-      ["Replying after 2 days", 8]
+      { text: "Watches 20 more", points: 35 },
+      { text: "Loses track of time", points: 25 },
+      { text: "Sends it to a friend", points: 20 },
+      { text: "Likes it", points: 12 },
+      { text: "Actually stops", points: 8 }
     ]
   },
 
   {
     id: 8,
-    question: "What happens when someone says \"one last reel\"?",
+    question: "What type of Reel gets sent to the group chat?",
     answers: [
-      ["Watches 20 more", 35],
-      ["Loses track of time", 25],
-      ["Sends it to a friend", 20],
-      ["Likes it", 12],
-      ["Actually stops", 8]
+      { text: "Relatable", points: 30 },
+      { text: "Savage/funny", points: 25 },
+      { text: "College-related", points: 20 },
+      { text: "Crush/relationship", points: 15 },
+      { text: "Completely random", points: 10 }
     ]
   },
 
   {
     id: 9,
-    question: "What type of Reel gets sent to the group chat?",
+    question: "Where does college gossip spread fastest?",
     answers: [
-      ["Relatable", 30],
-      ["Savage/funny", 25],
-      ["College-related", 20],
-      ["Crush/relationship", 15],
-      ["Completely random", 10]
+      { text: "Friend group", points: 30 },
+      { text: "WhatsApp group", points: 25 },
+      { text: "Canteen", points: 20 },
+      { text: "Snapchat/Instagram", points: 15 },
+      { text: "Someone told someone", points: 10 }
     ]
   },
 
   {
     id: 10,
-    question: "What makes someone instantly send a Reel to their best friend?",
+    question: "What does someone say before telling you gossip?",
     answers: [
-      ["This is literally you", 35],
-      ["Inside joke", 25],
-      ["Crush/relationship reference", 20],
-      ["Dark humour", 12],
-      ["Food/travel", 8]
+      { text: "Don't tell anyone…", points: 40 },
+      { text: "I shouldn't be telling you this…", points: 25 },
+      { text: "Promise you won't tell?", points: 15 },
+      { text: "Bro, listen…", points: 12 },
+      { text: "This is crazy", points: 8 }
     ]
   },
 
   {
     id: 11,
-    question: "Where does college gossip spread fastest?",
+    question: "What makes college gossip interesting?",
     answers: [
-      ["Friend group", 30],
-      ["WhatsApp group", 25],
-      ["Canteen", 20],
-      ["Snapchat/Instagram", 15],
-      ["Someone told someone", 10]
+      { text: "Crush involved", points: 30 },
+      { text: "Teacher involved", points: 25 },
+      { text: "Friend group involved", points: 20 },
+      { text: "Relationship drama", points: 15 },
+      { text: "Nobody knows the full story", points: 10 }
     ]
   },
 
   {
     id: 12,
-    question: "What does someone say before telling you gossip?",
+    question: "What does \"Bro is cooked\" mean?",
     answers: [
-      ["Don't tell anyone…", 40],
-      ["I shouldn't be telling you this…", 25],
-      ["Promise you won't tell?", 15],
-      ["Bro, listen…", 12],
-      ["This is crazy", 8]
+      { text: "He's in serious trouble", points: 35 },
+      { text: "Failed badly", points: 25 },
+      { text: "Mentally exhausted", points: 20 },
+      { text: "Situation is hopeless", points: 12 },
+      { text: "Actually cooking", points: 8 }
     ]
   },
 
   {
     id: 13,
-    question: "What makes college gossip interesting?",
+    question: "What does \"Delulu\" usually describe?",
     answers: [
-      ["Crush involved", 30],
-      ["Teacher involved", 25],
-      ["Friend group involved", 20],
-      ["Relationship drama", 15],
-      ["Nobody knows the full story", 10]
+      { text: "Being unrealistically hopeful", points: 40 },
+      { text: "Having a crush", points: 20 },
+      { text: "Overthinking", points: 15 },
+      { text: "Being confident", points: 15 },
+      { text: "Being completely confused", points: 10 }
     ]
   },
 
   {
     id: 14,
-    question: "What does \"Bro is cooked\" mean?",
+    question: "What does \"W\" mean in the group chat?",
     answers: [
-      ["He's in serious trouble", 35],
-      ["Failed badly", 25],
-      ["Mentally exhausted", 20],
-      ["Situation is hopeless", 12],
-      ["Actually cooking", 8]
+      { text: "Win", points: 45 },
+      { text: "Good decision", points: 25 },
+      { text: "Respect", points: 15 },
+      { text: "Congratulations", points: 10 },
+      { text: "Nobody knows anymore", points: 5 }
     ]
   },
 
   {
     id: 15,
-    question: "What does \"It's giving…\" usually mean?",
+    question: "What is the most common excuse for missing class?",
     answers: [
-      ["Describing a vibe", 40],
-      ["Complimenting someone", 20],
-      ["Judging something", 15],
-      ["Making a joke", 15],
-      ["Nobody knows anymore", 10]
+      { text: "I wasn't feeling well.", points: 30 },
+      { text: "I overslept.", points: 25 },
+      { text: "I had some work.", points: 20 },
+      { text: "I didn't know there was class.", points: 15 },
+      { text: "I thought it was cancelled.", points: 10 }
     ]
   },
 
   {
     id: 16,
-    question: "What does \"NPC\" describe?",
+    question: "What happens when students hear \"assignment submission is today\"?",
     answers: [
-      ["Someone acting predictable", 35],
-      ["Someone with no reaction", 25],
-      ["Someone behaving randomly", 20],
-      ["Someone always following others", 12],
-      ["A gaming character", 8]
+      { text: "Ask friends for the file", points: 30 },
+      { text: "Ask AI", points: 25 },
+      { text: "Google/YouTube it", points: 20 },
+      { text: "\"Bro, what assignment?\"", points: 20 },
+      { text: "Start immediately", points: 5 }
     ]
   },
 
   {
     id: 17,
-    question: "What does \"W\" mean in the group chat?",
+    question: "What happens 5 minutes before a presentation?",
     answers: [
-      ["Win", 45],
-      ["Good decision", 25],
-      ["Respect", 15],
-      ["Congratulations", 10],
-      ["Nobody knows anymore", 5]
+      { text: "Everyone suddenly practices", points: 30 },
+      { text: "Fight over who speaks first", points: 20 },
+      { text: "Check the PPT", points: 20 },
+      { text: "\"Bro, what's my part?\"", points: 20 },
+      { text: "Someone disappears", points: 10 }
     ]
   },
 
   {
     id: 18,
-    question: "What does \"Delulu\" usually describe?",
+    question: "What happens when someone says, \"Let's go to the canteen for 5 minutes\"?",
     answers: [
-      ["Being unrealistically hopeful", 40],
-      ["Having a crush", 20],
-      ["Overthinking", 15],
-      ["Being confident", 15],
-      ["Being completely confused", 10]
+      { text: "5 minutes becomes 30", points: 35 },
+      { text: "Everyone joins", points: 25 },
+      { text: "Gossip starts", points: 20 },
+      { text: "Buy something unnecessarily", points: 12 },
+      { text: "Actually return in 5 minutes", points: 8 }
     ]
   },
 
   {
     id: 19,
-    question: "What is the most common excuse for missing class?",
+    question: "What happens during a free period?",
     answers: [
-      ["I wasn't feeling well.", 30],
-      ["I overslept.", 25],
-      ["I had some work.", 20],
-      ["I didn't know there was class.", 15],
-      ["I thought it was cancelled.", 10]
+      { text: "Canteen", points: 30 },
+      { text: "Reels", points: 25 },
+      { text: "Gossip", points: 20 },
+      { text: "Sleep", points: 15 },
+      { text: "Last-minute assignment", points: 10 }
     ]
   },
 
   {
     id: 20,
-    question: "What happens when students hear \"assignment submission is today\"?",
+    question: "What do people do when they see their crush?",
     answers: [
-      ["Start immediately", 5],
-      ["Ask friends for the file", 30],
-      ["Google/YouTube it", 20],
-      ["Ask AI", 25],
-      ["Bro, what assignment?", 20]
+      { text: "Fix their hair", points: 30 },
+      { text: "Pretend not to notice", points: 25 },
+      { text: "Check their phone", points: 20 },
+      { text: "Act extra confident", points: 15 },
+      { text: "Forget how to walk", points: 10 }
     ]
   },
 
   {
     id: 21,
-    question: "What happens when the teacher says \"I won't take attendance today\"?",
+    question: "What is the first thing someone does after getting a DM from their crush?",
     answers: [
-      ["Everyone relaxes", 30],
-      ["Some students leave", 25],
-      ["Start talking", 20],
-      ["Open phones", 15],
-      ["Suddenly interested in the lecture", 10]
+      { text: "Shows their best friend", points: 35 },
+      { text: "Takes a screenshot", points: 25 },
+      { text: "Thinks about the reply", points: 20 },
+      { text: "Replies instantly", points: 12 },
+      { text: "Pretends they don't care", points: 8 }
     ]
   },
 
   {
     id: 22,
-    question: "What happens 5 minutes before a presentation?",
+    question: "What is the biggest sign someone likes someone?",
     answers: [
-      ["Everyone suddenly practices", 30],
-      ["Fight over who speaks first", 20],
-      ["Check the PPT", 20],
-      ["Bro, what's my part?", 20],
-      ["Someone disappears", 10]
+      { text: "Finds reasons to talk", points: 30 },
+      { text: "Replies quickly", points: 25 },
+      { text: "Remembers small things", points: 20 },
+      { text: "Looks at them repeatedly", points: 15 },
+      { text: "Friends start teasing them", points: 10 }
     ]
   },
 
   {
     id: 23,
-    question: "What happens when someone says, \"Let's go to the canteen for 5 minutes\"?",
+    question: "What is the biggest red flag in a person?",
     answers: [
-      ["5 minutes becomes 30", 35],
-      ["Everyone joins", 25],
-      ["Gossip starts", 20],
-      ["Buy something unnecessarily", 12],
-      ["Actually return in 5 minutes", 8]
+      { text: "Lies", points: 30 },
+      { text: "Never apologizes", points: 25 },
+      { text: "Talks badly about everyone", points: 20 },
+      { text: "\"I'm always right\"", points: 15 },
+      { text: "\"I'm not toxic\"", points: 10 }
     ]
   },
 
   {
     id: 24,
-    question: "What happens during a free period?",
+    question: "What do people do when they say, \"I'm going to sleep early tonight\"?",
     answers: [
-      ["Canteen", 30],
-      ["Reels", 25],
-      ["Gossip", 20],
-      ["Sleep", 15],
-      ["Last-minute assignment", 10]
+      { text: "Scroll Reels", points: 35 },
+      { text: "Watch Netflix/YouTube", points: 25 },
+      { text: "Overthink", points: 20 },
+      { text: "Text someone", points: 12 },
+      { text: "Actually sleep", points: 8 }
     ]
   },
 
   {
     id: 25,
-    question: "What is most likely to start an argument in a friend group?",
+    question: "What is the most common reason someone doesn't reply to a message?",
     answers: [
-      ["Where to eat", 30],
-      ["Who pays", 20],
-      ["Where to go", 20],
-      ["Someone cancelling plans", 15],
-      ["Bro, you didn't invite me?", 15]
+      { text: "\"I was busy.\"", points: 35 },
+      { text: "Forgot", points: 25 },
+      { text: "Saw it and ignored it", points: 20 },
+      { text: "Fell asleep", points: 12 },
+      { text: "\"My phone was on silent.\"", points: 8 }
     ]
   },
 
   {
     id: 26,
-    question: "What do people do when they see their crush?",
+    question: "What is the biggest group-chat betrayal?",
     answers: [
-      ["Fix their hair", 30],
-      ["Pretend not to notice", 25],
-      ["Check their phone", 20],
-      ["Act extra confident", 15],
-      ["Forget how to walk", 10]
+      { text: "Sending a private screenshot", points: 35 },
+      { text: "Breaking someone's secret", points: 25 },
+      { text: "Leaving someone on seen", points: 20 },
+      { text: "Removing someone from the group", points: 12 },
+      { text: "Reacting with 👍", points: 8 }
     ]
   },
 
   {
     id: 27,
-    question: "What is the first thing someone does after getting a DM from their crush?",
+    question: "What should never accidentally be sent to the wrong group chat?",
     answers: [
-      ["Shows their best friend", 35],
-      ["Takes a screenshot", 25],
-      ["Thinks about the reply", 20],
-      ["Replies instantly", 12],
-      ["Pretends they don't care", 8]
+      { text: "Screenshot", points: 35 },
+      { text: "Gossip", points: 30 },
+      { text: "Crush message", points: 20 },
+      { text: "Private photo", points: 10 },
+      { text: "\"Look what they said 😂\"", points: 5 }
     ]
   },
 
   {
     id: 28,
-    question: "What is the biggest sign someone likes someone?",
+    question: "What is most likely to be discussed in the class WhatsApp group?",
     answers: [
-      ["Finds reasons to talk", 30],
-      ["Replies quickly", 25],
-      ["Remembers small things", 20],
-      ["Looks at them repeatedly", 15],
-      ["Friends start teasing them", 10]
+      { text: "Assignment", points: 30 },
+      { text: "Attendance", points: 25 },
+      { text: "Class timing", points: 20 },
+      { text: "\"Is there class tomorrow?\"", points: 15 },
+      { text: "Random meme", points: 10 }
     ]
   },
 
   {
     id: 29,
-    question: "What do people do when they see an attractive person walking toward them?",
+    question: "What happens when someone asks \"Guys, attendance today?\"",
     answers: [
-      ["Fix their hair", 30],
-      ["Check themselves in phone camera", 25],
-      ["Walk differently", 20],
-      ["Pretend not to care", 15],
-      ["Forget how to function", 10]
+      { text: "Everyone checks their own", points: 30 },
+      { text: "\"I'm not going.\"", points: 25 },
+      { text: "Calculate percentage", points: 20 },
+      { text: "Someone sends a screenshot", points: 15 },
+      { text: "\"Ask the teacher.\"", points: 10 }
     ]
   },
 
   {
     id: 30,
-    question: "What is the biggest red flag in a person?",
+    question: "What is the first thing a fresher notices about a new class?",
     answers: [
-      ["Lies", 30],
-      ["Never apologizes", 25],
-      ["Talks badly about everyone", 20],
-      ["I'm always right", 15],
-      ["Says I'm not toxic", 10]
+      { text: "Who looks friendly", points: 25 },
+      { text: "Who is attractive 👀", points: 20 },
+      { text: "Who seems smart", points: 20 },
+      { text: "Where everyone sits", points: 20 },
+      { text: "Who should I talk to?", points: 15 }
     ]
   },
 
   {
     id: 31,
-    question: "What is the biggest sign someone is toxic?",
+    question: "How does a new college friendship usually start?",
     answers: [
-      ["Blames everyone else", 30],
-      ["Never admits they're wrong", 25],
-      ["Constant drama", 20],
-      ["Controlling behaviour", 15],
-      ["Says I'm the least toxic person", 10]
+      { text: "\"Which section are you in?\"", points: 25 },
+      { text: "Asking for notes", points: 25 },
+      { text: "Sitting beside someone", points: 20 },
+      { text: "Group project", points: 15 },
+      { text: "\"What's your Instagram/Snap?\"", points: 15 }
     ]
   },
 
   {
     id: 32,
-    question: "What do people do when they say, \"I'm going to sleep early tonight\"?",
+    question: "What does a CSE student do when their code doesn't work?",
     answers: [
-      ["Scroll Reels", 35],
-      ["Watch Netflix/YouTube", 25],
-      ["Overthink", 20],
-      ["Text someone", 12],
-      ["Actually sleep", 8]
+      { text: "Google it", points: 30 },
+      { text: "YouTube it", points: 20 },
+      { text: "Ask a friend", points: 20 },
+      { text: "ChatGPT, please save me.", points: 20 },
+      { text: "Read the error", points: 10 }
     ]
   },
 
   {
     id: 33,
-    question: "What is something students say every day but rarely mean?",
+    question: "What happens during a group project?",
     answers: [
-      ["I'll study tonight.", 35],
-      ["I'm coming in 5 minutes.", 25],
-      ["One last reel.", 20],
-      ["I'll sleep early.", 12],
-      ["I'm not hungry.", 8]
+      { text: "One person does everything", points: 30 },
+      { text: "Someone disappears", points: 25 },
+      { text: "Everyone says \"I'll do it tonight\"", points: 20 },
+      { text: "Last-minute panic", points: 15 },
+      { text: "Somehow it gets submitted", points: 10 }
     ]
   },
 
   {
     id: 34,
-    question: "What is the most common reason someone doesn't reply to a message?",
+    question: "What does the person who says \"I'll do it tonight\" usually do?",
     answers: [
-      ["I was busy.", 35],
-      ["Forgot", 25],
-      ["Saw it and ignored it", 20],
-      ["Fell asleep", 12],
-      ["My phone was on silent.", 8]
+      { text: "Does nothing", points: 35 },
+      { text: "Sends it at the last minute", points: 25 },
+      { text: "Says \"Bro, remind me\"", points: 20 },
+      { text: "Copies someone else's part", points: 12 },
+      { text: "Actually finishes it", points: 8 }
     ]
   },
 
   {
     id: 35,
-    question: "What is the biggest group-chat betrayal?",
+    question: "What is the biggest enemy of a student in Guwahati?",
     answers: [
-      ["Sending a private screenshot", 35],
-      ["Breaking someone's secret", 25],
-      ["Leaving someone on seen", 20],
-      ["Removing someone from the group", 12],
-      ["Reacting with 👍", 8]
+      { text: "Sudden rain", points: 30 },
+      { text: "Traffic", points: 25 },
+      { text: "Humidity", points: 20 },
+      { text: "Getting late to class", points: 15 },
+      { text: "All of the above", points: 10 }
     ]
   },
 
   {
     id: 36,
-    question: "What should never accidentally be sent to the wrong group chat?",
+    question: "What is the first thought after coming back to the room after college?",
     answers: [
-      ["Screenshot", 35],
-      ["Gossip", 30],
-      ["Crush message", 20],
-      ["Private photo", 10],
-      ["Look what they said 😂", 5]
+      { text: "\"I'm hungry.\"", points: 30 },
+      { text: "\"I need to sleep.\"", points: 25 },
+      { text: "\"I'll study after 10 minutes.\"", points: 20 },
+      { text: "Open Instagram", points: 15 },
+      { text: "\"What should I eat?\"", points: 10 }
     ]
   },
 
   {
     id: 37,
-    question: "What is most likely to be discussed in the class WhatsApp group?",
+    question: "What is most likely to expose someone in a friend group?",
     answers: [
-      ["Assignment", 30],
-      ["Attendance", 25],
-      ["Class timing", 20],
-      ["Is there class tomorrow?", 15],
-      ["Random meme", 10]
+      { text: "Screenshot", points: 35 },
+      { text: "Old photo", points: 25 },
+      { text: "Group chat message", points: 20 },
+      { text: "Story archive", points: 12 },
+      { text: "Friend accidentally telling everyone", points: 8 }
     ]
   },
 
   {
     id: 38,
-    question: "What happens when someone asks \"Guys, attendance today?\"",
+    question: "Who usually knows the latest college gossip first?",
     answers: [
-      ["Everyone checks their own", 30],
-      ["I'm not going.", 25],
-      ["Calculate percentage", 20],
-      ["Someone sends a screenshot", 15],
-      ["Ask the teacher.", 10]
+      { text: "The social person", points: 25 },
+      { text: "Class group admin", points: 25 },
+      { text: "Canteen regular", points: 20 },
+      { text: "Someone from another section", points: 15 },
+      { text: "That one person who knows EVERYTHING", points: 15 }
     ]
   },
 
   {
     id: 39,
-    question: "What is the first thing a fresher notices about a new class?",
+    question: "What is the biggest lie students tell themselves?",
     answers: [
-      ["Who looks friendly", 25],
-      ["Who is attractive 👀", 20],
-      ["Who seems smart", 20],
-      ["Where everyone sits", 20],
-      ["Who should I talk to?", 15]
+      { text: "\"I'll study tomorrow.\"", points: 35 },
+      { text: "\"I'll sleep early tonight.\"", points: 25 },
+      { text: "\"I'll attend every class from now.\"", points: 20 },
+      { text: "\"I'll only watch one reel.\"", points: 12 },
+      { text: "\"This semester I'll be serious.\"", points: 8 }
     ]
   },
 
   {
     id: 40,
-    question: "How does a new college friendship usually start?",
-    answers: [
-      ["Which section are you in?", 25],
-      ["Asking for notes", 25],
-      ["Sitting beside someone", 20],
-      ["Group project", 15],
-      ["What's your Instagram/Snap?", 15]
-    ]
-  },
-
-  {
-    id: 41,
-    question: "What does a CSE student do when their code doesn't work?",
-    answers: [
-      ["Read the error", 10],
-      ["Google it", 30],
-      ["YouTube it", 20],
-      ["Ask a friend", 20],
-      ["ChatGPT, please save me.", 20]
-    ]
-  },
-
-  {
-    id: 42,
-    question: "What happens during a group project?",
-    answers: [
-      ["One person does everything", 30],
-      ["Someone disappears", 25],
-      ["Everyone says I'll do it tonight", 20],
-      ["Last-minute panic", 15],
-      ["Somehow it gets submitted", 10]
-    ]
-  },
-
-  {
-    id: 43,
-    question: "What does the person who says \"I'll do it tonight\" usually do?",
-    answers: [
-      ["Does nothing", 35],
-      ["Sends it at the last minute", 25],
-      ["Says Bro, remind me", 20],
-      ["Copies someone else's part", 12],
-      ["Actually finishes it", 8]
-    ]
-  },
-
-  {
-    id: 44,
-    question: "What is the biggest enemy of a student in Guwahati?",
-    answers: [
-      ["Sudden rain", 30],
-      ["Traffic", 25],
-      ["Humidity", 20],
-      ["Getting late to class", 15],
-      ["All of the above", 10]
-    ]
-  },
-
-  {
-    id: 45,
-    question: "What is the first thought after coming back to the room after college?",
-    answers: [
-      ["I'm hungry.", 30],
-      ["I need to sleep.", 25],
-      ["I'll study after 10 minutes.", 20],
-      ["Open Instagram", 15],
-      ["What should I eat?", 10]
-    ]
-  },
-
-  {
-    id: 46,
-    question: "What is most likely to expose someone in a friend group?",
-    answers: [
-      ["Screenshot", 35],
-      ["Old photo", 25],
-      ["Group chat message", 20],
-      ["Story archive", 12],
-      ["Friend accidentally telling everyone", 8]
-    ]
-  },
-
-  {
-    id: 47,
-    question: "Who usually knows the latest college gossip first?",
-    answers: [
-      ["The social person", 25],
-      ["Class group admin", 25],
-      ["Canteen regular", 20],
-      ["Someone from another section", 15],
-      ["That one person who knows EVERYTHING", 15]
-    ]
-  },
-
-  {
-    id: 48,
-    question: "Who is most likely to become famous on campus?",
-    answers: [
-      ["The extrovert", 25],
-      ["The funny one", 25],
-      ["The attractive one", 20],
-      ["The topper", 15],
-      ["The mysterious quiet person", 15]
-    ]
-  },
-
-  {
-    id: 49,
-    question: "What happens after someone gets rejected?",
-    answers: [
-      ["I'm fine.", 30],
-      ["Tells their best friend", 25],
-      ["Archives/deletes the chat", 20],
-      ["Acts like they never cared", 15],
-      ["Suddenly becomes a gym bro", 10]
-    ]
-  },
-
-  {
-    id: 50,
-    question: "What is the biggest lie students tell themselves?",
-    answers: [
-      ["I'll study tomorrow.", 35],
-      ["I'll sleep early tonight.", 25],
-      ["I'll attend every class from now.", 20],
-      ["I'll only watch one reel.", 12],
-      ["This semester I'll be serious.", 8]
-    ]
-  },
-
-  {
-    id: 51,
-    question: "Name something students check before class.",
-    answers: [
-      ["WhatsApp", 30],
-      ["Attendance", 25],
-      ["Timetable", 20],
-      ["Classroom", 15],
-      ["Instagram", 10]
-    ]
-  },
-
-  {
-    id: 52,
-    question: "Name a social media app students use every day.",
-    answers: [
-      ["Instagram", 35],
-      ["WhatsApp", 30],
-      ["Snapchat", 20],
-      ["YouTube", 10],
-      ["Facebook", 5]
-    ]
-  },
-
-  {
-    id: 53,
-    question: "Name something that spreads quickly on campus.",
-    answers: [
-      ["Gossip", 35],
-      ["Rumours", 25],
-      ["Memes", 20],
-      ["News", 12],
-      ["Screenshots", 8]
-    ]
-  },
-
-  {
-    id: 54,
-    question: "Name an excuse students give for being late.",
-    answers: [
-      ["Traffic", 30],
-      ["Overslept", 25],
-      ["Couldn't find transport", 20],
-      ["Rain", 15],
-      ["I was on my way", 10]
-    ]
-  },
-
-  {
-    id: 55,
     question: "Name something students do instead of studying.",
     answers: [
-      ["Reels", 35],
-      ["Snapchat", 25],
-      ["YouTube", 20],
-      ["Gaming", 12],
-      ["Gossip", 8]
+      { text: "Reels", points: 35 },
+      { text: "Snapchat", points: 25 },
+      { text: "YouTube", points: 20 },
+      { text: "Gaming", points: 12 },
+      { text: "Gossip", points: 8 }
     ]
   }
 ];
+function showQuestion(question) {
+  // Display the question text
+  const questionBox = document.getElementById("question");
+  questionBox.textContent = question.question;
+
+  // Display the answers in the yellow boxes
+  question.answers.forEach((answer, i) => {
+    const box = document.getElementById(`answer-${i}`);
+    if (box) {
+      box.textContent = `${answer.text} (${answer.points})`;
+    }
+  });
+}
 
 
 // Optional helper functions
